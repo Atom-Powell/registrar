@@ -1,0 +1,12 @@
+# .NET build output
+bin/
+obj/
+dist/
+
+# Local scratch
+*.user
+.vs/
+
+# Subagent-driven-development scratch: ledgers, briefs, and review packages.
+# Per-plan working files, not repo history.
+.superpowers/

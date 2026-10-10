@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactIdentity": {
+    "artifactType": "RAF",
+    "documentId": "ORG-RSK-RAF-001",
+    "version": "v1.0",
+    "classification": "Controlled Signoff",
+    "approvalStatus": "In Review",
+    "layer": "Operational"
+  },
+  "context": {
+    "client": "Talewind CPA",
+    "engagement": "Copilot Chat Pilot 2026",
+    "owner": "Registry Owner",
+    "audience": "Client security owner, ORG deployer, ORG reviewer",
+    "preparedBy": "ORG Consulting, LLC",
+    "reviewDate": "2026-12-01",
+    "reviewDateOverride": null
+  },
+  "sourceWorkflowContext": {
+    "workflowName": "Copilot Readiness Assessment",
+    "phase": "Risk Acceptance",
+    "executionId": "GOV-2026-07-11-004"
+  },
+  "dataInputs": {
+    "placeholderMap": {
+      "[CLIENT ORGANIZATION NAME]": "Talewind CPA",
+      "[CLIENT TENANT NAME / TENANT ID]": "talewindcpa.onmicrosoft.com",
+      "[DATE]": "2026-07-11",
+      "[VERSION]": "v1.0"
+    },
+    "sections": [
+      { "title": "Identification", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "This form records a single deviation from the connector deployment runbook for the approved pilot engagement, including client, tenant, originating runbook and version, and the section deviated from." },
+        { "blockType": "warnCallout", "text": "This deviation is not yet approved for distribution outside the review chain." }
+      ] },
+      { "title": "Description", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "A Graph scope broader than the approved use case requires is granted to support a defined reporting workflow for a named group over a fixed period." }
+      ] },
+      { "title": "Risks Acknowledged", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "The broader scope increases the data reachable by the connector for the named group; the affected roles, regulatory obligations, and any audit or discoverability gaps are recorded." },
+        { "blockType": "clauseInsertion", "clauseId": "CL-008" }
+      ] },
+      { "title": "Compensating Controls", "descriptorLine": null, "blocks": [
+        { "blockType": "bulletList", "items": [
+          "Access restricted to the named group by Entra app assignment.",
+          "Anomaly monitoring stood up with a baseline before go-live.",
+          "Users notified and retrained on the narrowed use case."
+        ] }
+      ] },
+      { "title": "Review and Sunset", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "The deviation takes effect on the recorded date, expires at a fixed review date, and is reassessed on any qualifying trigger; the disposition at review is to extend, narrow, or withdraw." }
+      ] },
+      { "title": "Sign-off", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "Signed before implementation by the ORG deployer, the ORG reviewer, and the client designated security owner; retroactive sign-off is not permitted." }
+      ] }
+    ],
+    "normalizedFindings": null,
+    "normalizedRisks": null,
+    "normalizedInventoryEntities": null
+  },
+  "evidenceReferences": null,
+  "dependencies": [
+    { "dependencyId": "ORG-MST-SCL", "kind": "clause-library", "blocking": true }
+  ],
+  "renderingOptions": {
+    "packageName": "Governed AI Rollout",
+    "outputFileName": "ORG - Risk Acceptance and Sign-off Form - Talewind CPA - v1.0.docx",
+    "optionalSectionToggles": null,
+    "stylingProfile": "org-v1.2"
+  },
+  "validationPolicy": {
+    "mode": "promotion",
+    "additionalRequiredCheckIds": null,
+    "warningThreshold": null
+  }
+}

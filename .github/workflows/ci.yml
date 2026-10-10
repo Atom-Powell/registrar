@@ -1,0 +1,43 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  build-test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - run: dotnet build Registrar.sln --configuration Release
+      - run: dotnet test Registrar.sln --configuration Release --no-build
+
+      # The suite used to leak every temp directory it created: 18,450 of them, holding
+      # 10,591 rendered DOCX files, found only because someone eventually went looking
+      # (issue #69). TempDir now cleans up after each run, and every directory it creates
+      # carries the registrar-test- prefix, which makes the invariant cheap to assert.
+      # Asserting it here is the point: the failure mode was never that cleanup was hard,
+      # it was that nothing ever noticed it had stopped happening.
+      - name: No temp directories left behind
+        shell: pwsh
+        run: |
+          $left = @(Get-ChildItem -LiteralPath ([System.IO.Path]::GetTempPath()) `
+                      -Directory -Filter 'registrar-test-*' -ErrorAction SilentlyContinue)
+          if ($left.Count -gt 0) {
+            Write-Host "::error::$($left.Count) test temp directories survived the suite."
+            $left | Select-Object -First 20 | ForEach-Object { Write-Host "  $($_.FullName)" }
+            exit 1
+          }
+          Write-Host 'No test temp directories left behind.'
+
+      - name: Pester
+        shell: pwsh
+        run: |
+          Import-Module Pester -MinimumVersion 5.0
+          $c = New-PesterConfiguration
+          $c.Run.Path = 'tests/powershell'
+          $c.Run.Exit = $true
+          $c.Output.Verbosity = 'Detailed'
+          Invoke-Pester -Configuration $c

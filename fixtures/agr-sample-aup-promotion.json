@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactIdentity": {
+    "artifactType": "AUP",
+    "documentId": "ORG-GOV-AUP-004",
+    "version": "v1.0",
+    "classification": "Client-Facing",
+    "approvalStatus": "In Review",
+    "layer": "Governance"
+  },
+  "context": {
+    "client": "Talewind CPA",
+    "engagement": "Copilot Chat Pilot 2026",
+    "owner": "Registry Owner",
+    "audience": "Approved users, Talewind CPA leadership, security owner",
+    "preparedBy": "ORG Consulting, LLC",
+    "reviewDate": "2026-12-01",
+    "reviewDateOverride": null
+  },
+  "sourceWorkflowContext": {
+    "workflowName": "Copilot Readiness Assessment",
+    "phase": "Reporting",
+    "executionId": "GOV-2026-07-05-002"
+  },
+  "dataInputs": {
+    "placeholderMap": {
+      "[CLIENT ORGANIZATION NAME]": "Talewind CPA",
+      "[TOOL / CONNECTOR NAME]": "Microsoft Copilot Chat",
+      "[APPROVED USERS]": "Copilot Pilot Group",
+      "[SUPPORT CONTACT]": "support@orgconsulting.example",
+      "[DESIGNATED SECURITY OWNER]": "J. Talewind",
+      "[DATA TYPES IN SCOPE]": "Non-restricted business content",
+      "[DATA TYPES OUT OF SCOPE]": "Regulated client financial data",
+      "[CLIENT POLICY REFERENCES]": "Talewind CPA Acceptable Use Standard",
+      "[DATE]": "2026-07-05",
+      "[VERSION]": "v1.0"
+    },
+    "sections": [
+      { "title": "Purpose", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "This policy defines approved use of the deployed tool." }
+      ] },
+      { "title": "Approved Use", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "Approved users may use the tool for approved business purposes." },
+        { "blockType": "clauseInsertion", "clauseId": "CL-001" }
+      ] },
+      { "title": "Prohibited Use", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "The following uses are prohibited." },
+        { "blockType": "clauseInsertion", "clauseId": "CL-004" }
+      ] },
+      { "title": "Data Handling Requirements", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "Users must handle data within the approved scope." },
+        { "blockType": "clauseInsertion", "clauseId": "CL-005" }
+      ] },
+      { "title": "Output Responsibility", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "Users remain responsible for verifying all output before use." }
+      ] },
+      { "title": "Audit and Sensitive-Content Validation", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "Audit posture is subject to tenant validation." }
+      ] },
+      { "title": "User Acknowledgment", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "Users acknowledge the obligations in this policy." },
+        { "blockType": "clauseInsertion", "clauseId": "CL-009" }
+      ] },
+      { "title": "Escalation Requirements", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "Escalate suspected issues to the support contact." }
+      ] },
+      { "title": "Policy Review and Ownership", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "This policy is reviewed on the standard interval by the owner." }
+      ] }
+    ],
+    "normalizedFindings": null,
+    "normalizedRisks": null,
+    "normalizedInventoryEntities": null
+  },
+  "evidenceReferences": null,
+  "dependencies": [
+    { "dependencyId": "ORG-MST-SCL", "kind": "clause-library", "blocking": true }
+  ],
+  "renderingOptions": {
+    "packageName": "Governed AI Rollout",
+    "outputFileName": "ORG - Acceptable Use Policy - Talewind CPA - v1.0.docx",
+    "optionalSectionToggles": null,
+    "stylingProfile": "org-v1.2"
+  },
+  "validationPolicy": {
+    "mode": "promotion",
+    "additionalRequiredCheckIds": null,
+    "warningThreshold": null
+  }
+}

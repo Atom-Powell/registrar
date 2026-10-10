@@ -1,0 +1,226 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactIdentity": {
+    "artifactType": "AUP",
+    "documentId": "ORG-GOV-AUP-903",
+    "version": "v1.0",
+    "classification": "Client-Facing",
+    "approvalStatus": "Draft",
+    "layer": "Governance"
+  },
+  "context": {
+    "client": "Fixture Client",
+    "engagement": "Governor Fixture Validation",
+    "owner": "Registry Owner",
+    "audience": "Approved pilot users and their managers at Fixture Client",
+    "preparedBy": "ORG Consulting, LLC",
+    "reviewDate": null,
+    "reviewDateOverride": null
+  },
+  "sourceWorkflowContext": {
+    "workflowName": "Governor Fixture Generation",
+    "phase": "Draft",
+    "executionId": "GOV-FIXTURE-AUP-903"
+  },
+  "dataInputs": {
+    "placeholderMap": {
+      "[CLIENT ORGANIZATION NAME]": "Fixture Client",
+      "[TOOL / CONNECTOR NAME]": "Microsoft 365 Copilot connector",
+      "[APPROVED USERS]": "Approved pilot users",
+      "[SUPPORT CONTACT]": "ORG Support",
+      "[DESIGNATED SECURITY OWNER]": "Fixture Security Owner",
+      "[DATA TYPES IN SCOPE]": "Approved business content made available through configured connector sources",
+      "[DATA TYPES OUT OF SCOPE]": "Credentials, secrets, unapproved regulated data, and non-business personal data",
+      "[CLIENT POLICY REFERENCES]": "Client acceptable use, security, and data handling policies",
+      "[DATE]": "2026-07-14",
+      "[VERSION]": "v1.0"
+    },
+    "sections": [
+      {
+        "title": "Purpose",
+        "descriptorLine": "Read and acknowledge before your first session.",
+        "blocks": [
+          {
+            "blockType": "paragraph",
+            "text": "This policy states how approved pilot users at Fixture Client may use the Microsoft 365 Copilot connector, what they may not do with it, and what they remain responsible for. It sits alongside the client acceptable use, security, and data handling policies rather than replacing them."
+          }
+        ]
+      },
+      {
+        "title": "Approved Use",
+        "descriptorLine": null,
+        "blocks": [
+          {
+            "blockType": "paragraph",
+            "text": "Use is approved for the pilot group only, through managed business accounts, and only for the purposes listed below."
+          },
+          {
+            "blockType": "bulletList",
+            "items": [
+              "Searching approved business content made available through configured connector sources",
+              "Summarizing documents and threads you are already permitted to read",
+              "Drafting routine business writing that you will review and edit before use",
+              "Preparing talking points and briefs from approved internal material"
+            ]
+          },
+          {
+            "blockType": "clauseInsertion",
+            "clauseId": "CL-001"
+          }
+        ]
+      },
+      {
+        "title": "Prohibited Use",
+        "descriptorLine": null,
+        "blocks": [
+          {
+            "blockType": "paragraph",
+            "text": "The following are prohibited without exception. They are not judgment calls, and they do not become acceptable under time pressure."
+          },
+          {
+            "blockType": "bulletList",
+            "items": [
+              "Entering credentials, secrets, API keys, tokens, or recovery codes",
+              "Processing regulated, health, legal, or client-confidential data outside approved scope",
+              "Using the connector from a personal account or an unmanaged device",
+              "Presenting connector output as a final answer without human review"
+            ]
+          },
+          {
+            "blockType": "clauseInsertion",
+            "clauseId": "CL-004"
+          }
+        ]
+      },
+      {
+        "title": "Data Handling Requirements",
+        "descriptorLine": null,
+        "blocks": [
+          {
+            "blockType": "paragraph",
+            "text": "Supply the least content that will do the job. If a document does the work of a paragraph, supply the paragraph."
+          },
+          {
+            "blockType": "table",
+            "columnHeaders": [
+              "Data type",
+              "Status",
+              "Handling"
+            ],
+            "rows": [
+              [
+                "Approved business content in connector sources",
+                "In scope",
+                "May be used within approved purpose"
+              ],
+              [
+                "Credentials, secrets, and access codes",
+                "Prohibited",
+                "Never enter under any circumstances"
+              ],
+              [
+                "Regulated, health, and legal data",
+                "Out of scope",
+                "Requires approval before any use"
+              ],
+              [
+                "Non-business personal data",
+                "Out of scope",
+                "Do not supply to the connector"
+              ]
+            ]
+          },
+          {
+            "blockType": "clauseInsertion",
+            "clauseId": "CL-003"
+          },
+          {
+            "blockType": "clauseInsertion",
+            "clauseId": "CL-005"
+          }
+        ]
+      },
+      {
+        "title": "Output Responsibility",
+        "descriptorLine": null,
+        "blocks": [
+          {
+            "blockType": "paragraph",
+            "text": "The user who sends, publishes, or acts on connector output owns that output. Verify facts, figures, names, dates, recipients, attachments, and commitments before anything leaves your hands. A confident tone in the output is not evidence that it is correct."
+          }
+        ]
+      },
+      {
+        "title": "Audit and Sensitive-Content Validation",
+        "descriptorLine": null,
+        "blocks": [
+          {
+            "blockType": "paragraph",
+            "text": "Connector activity may be logged and reviewed in line with the client policy references above. If the connector returns content you did not expect to be able to see, stop, do not reuse the content, and report it to the designated security owner."
+          }
+        ]
+      },
+      {
+        "title": "User Acknowledgment",
+        "descriptorLine": null,
+        "blocks": [
+          {
+            "blockType": "paragraph",
+            "text": "Each approved pilot user acknowledges that they have read this policy, understand the approved and prohibited uses, and accept responsibility for the output they act on. Acknowledgment is recorded before first access is granted."
+          }
+        ]
+      },
+      {
+        "title": "Escalation Requirements",
+        "descriptorLine": null,
+        "blocks": [
+          {
+            "blockType": "paragraph",
+            "text": "Escalate to the designated security owner, or to ORG Support for questions of approved use, when any of the following occurs."
+          },
+          {
+            "blockType": "bulletList",
+            "items": [
+              "You are unsure whether content is sensitive or in scope",
+              "The connector surfaces content that appears to be restricted",
+              "Output contains a claim you cannot verify but are expected to rely on",
+              "You are asked to use the connector outside its approved purpose"
+            ]
+          },
+          {
+            "blockType": "clauseInsertion",
+            "clauseId": "CL-009"
+          }
+        ]
+      },
+      {
+        "title": "Policy Review and Ownership",
+        "descriptorLine": null,
+        "blocks": [
+          {
+            "blockType": "paragraph",
+            "text": "Registry Owner owns this policy. The designated security owner at Fixture Client owns enforcement. It is reviewed at least every six months, or sooner if the approved user group, the connector configuration, or the data boundary changes."
+          }
+        ]
+      }
+    ],
+    "normalizedFindings": null,
+    "normalizedRisks": null,
+    "normalizedInventoryEntities": null
+  },
+  "evidenceReferences": null,
+  "dependencies": [
+    { "dependencyId": "ORG-MST-SCL", "kind": "clause-library", "blocking": true }
+  ],
+  "renderingOptions": {
+    "packageName": "Governor Fixture Pack",
+    "outputFileName": "ORG - Acceptable Use Policy - Fixture Client - v1.0.docx",
+    "optionalSectionToggles": null,
+    "stylingProfile": "org-v1.2"
+  },
+  "validationPolicy": {
+    "mode": "draft",
+    "additionalRequiredCheckIds": null,
+    "warningThreshold": null
+  }
+}

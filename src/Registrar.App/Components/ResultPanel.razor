@@ -1,0 +1,115 @@
+@using System.IO
+@inject IOperatorHost Host
+
+@* What a run said, in the same words the console prints: ReportPresenter builds the lines,
+   so the window and the CLI cannot describe a result differently. Actions are shown only
+   when they are real: a document button only if the DOCX landed this run, a copy button
+   only if something failed. *@
+
+<section class="result" aria-live="polite">
+    @if (Result.Report is not null)
+    {
+        <div class="report">
+            @foreach (var (line, index) in lines.Select((l, i) => (l, i)))
+            {
+                @if (index == 0)
+                {
+                    <div class="line @StyleClass(line.Style) banner" data-status="@StyleClass(line.Style)"><Icon Kind="@StyleClass(line.Style)" Size="22" />@line.Text</div>
+                }
+                else
+                {
+                    <div class="line @StyleClass(line.Style)">@line.Text</div>
+                }
+            }
+        </div>
+    }
+
+    @foreach (var message in Result.Messages.Where(m => m.Stream == RunStream.Out))
+    {
+        <p class="summary">@message.Text</p>
+    }
+
+    @if (Result.ErrorText.Length > 0)
+    {
+        <p class="error" role="alert"><Icon Kind="alert" Size="16" />@Result.ErrorText</p>
+    }
+
+    <div class="actions">
+        @if (Result.DocumentFileName is not null)
+        {
+            <button type="button" class="open-document primary" @onclick="OpenDocument">Open document</button>
+        }
+        @if (Result.Report is not null && Result.Written.Contains("validation-report.json"))
+        {
+            <button type="button" class="open-report" @onclick="OpenReport">Open report</button>
+        }
+        @if (Result.OutputDirectory.Length > 0)
+        {
+            <button type="button" class="open-folder" @onclick="OpenFolder">Open folder</button>
+        }
+        @if (HasFailures)
+        {
+            <button type="button" class="copy-failures" @onclick="CopyFailures"><Icon Kind="clipboard" Size="15" />Copy failures for the Governor</button>
+        }
+    </div>
+
+    @if (problem is not null)
+    {
+        <p class="problem error" role="alert"><Icon Kind="alert" Size="16" />@problem</p>
+    }
+    @if (copied is not null)
+    {
+        <p class="notice" role="status">@copied</p>
+    }
+</section>
+
+@code {
+    [Parameter, EditorRequired] public AgrFileRunResult Result { get; set; } = default!;
+
+    private IReadOnlyList<PresenterLine> lines = Array.Empty<PresenterLine>();
+    private string? problem;
+    private string? copied;
+
+    private bool HasFailures =>
+        Result.Report is not null && Result.Report.Checks.Any(c => c.Result == CheckResultValue.Fail);
+
+    protected override void OnParametersSet()
+    {
+        lines = Result.Report is null ? Array.Empty<PresenterLine>() : ReportPresenter.Present(Result.Report);
+        problem = null;
+        copied = null;
+    }
+
+    private static string StyleClass(LineStyle style) => style switch
+    {
+        LineStyle.Pass => "pass",
+        LineStyle.Warn => "warn",
+        LineStyle.Fail => "fail",
+        _ => ""
+    };
+
+    private void OpenDocument() => Act(() => Host.OpenPath(Path.Combine(Result.OutputDirectory, Result.DocumentFileName!)),
+        "The document could not be opened: ");
+
+    private void OpenReport() => Act(() => Host.OpenPath(Path.Combine(Result.OutputDirectory, "validation-report.json")),
+        "The report could not be opened: ");
+
+    private void OpenFolder() => Act(() => Host.OpenPath(Result.OutputDirectory),
+        "The folder could not be opened: ");
+
+    private void CopyFailures() => Act(() =>
+    {
+        Host.CopyText(GovernorClipboardText.Build(Result.Report!));
+        copied = "Copied the failures. Paste them into the Governor chat.";
+    }, "The failures could not be copied: ");
+
+    // Every action here talks to the machine, so each one catches; an escape would end the
+    // process.
+    private void Act(Action action, string failurePrefix)
+    {
+        problem = null;
+        copied = null;
+        try { action(); }
+        catch (Exception ex) { problem = failurePrefix + ex.Message; }
+    }
+}

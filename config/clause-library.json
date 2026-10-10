@@ -1,0 +1,77 @@
+{
+  "$comment": "Shared Clause Library v1.2 extracted verbatim from ORG-MST-SPEC-001 Section 7. canonicalTextSha256 is computed over the UTF-8 canonical text including unresolved placeholder tokens. Verbatim validation: resolve placeholders per the request placeholder map, or match canonical text with tokens intact; any other deviation is a ClauseResolutionError.",
+  "libraryId": "ORG-MST-SCL",
+  "libraryVersion": "v1.2",
+  "clauses": [
+    {
+      "clauseId": "CL-001",
+      "name": "First-draft rule",
+      "canonicalText": "All output produced by [TOOL / CONNECTOR NAME] must be treated as a draft. Users remain responsible for verifying facts, recipients, attachments, names, dates, figures, commitments, and source material before use.",
+      "canonicalTextSha256": "6faa26f1e52544125636c96c4e98e27f85b565d91056b1dff764ec2d360eb866",
+      "containsPlaceholders": true
+    },
+    {
+      "clauseId": "CL-002",
+      "name": "Approved access boundary",
+      "canonicalText": "[TOOL / CONNECTOR NAME] may only be used by approved users and only through approved business accounts, approved connection methods, and approved client use cases.",
+      "canonicalTextSha256": "b852b778c051df3656249bf5291b5cd73193963356202d920be63d3326a8cf10",
+      "containsPlaceholders": true
+    },
+    {
+      "clauseId": "CL-003",
+      "name": "Least-content rule",
+      "canonicalText": "Users should provide the minimum amount of content necessary to complete the task and should remove unnecessary identifiers, account numbers, credentials, confidential details, or restricted data before use.",
+      "canonicalTextSha256": "36a5c3d84c2809e022949e6cc1268c5cdc1a7a03295f24df155914f18d02b6f1",
+      "containsPlaceholders": false
+    },
+    {
+      "clauseId": "CL-004",
+      "name": "Prohibited credential handling",
+      "canonicalText": "Users must not enter or expose passwords, secrets, API keys, MFA codes, recovery codes, tokens, or other credential material.",
+      "canonicalTextSha256": "9dc929947b72b95b3c834d53026091a31763dce429b0199170158734f0d21ee9",
+      "containsPlaceholders": false
+    },
+    {
+      "clauseId": "CL-005",
+      "name": "Sensitive data boundary",
+      "canonicalText": "Restricted personal data, regulated data, financial account data, health data, legal data, client confidential data, and other highly sensitive content must not be processed outside the approved scope.",
+      "canonicalTextSha256": "2a519ed7dcd5a0b53fd928bc19320745f1c38dc0e4f3477bf329796800ca2cd5",
+      "containsPlaceholders": false
+    },
+    {
+      "clauseId": "CL-006",
+      "name": "Audit validation limitation",
+      "canonicalText": "Audit visibility, retention, and item-level evidence depend on Microsoft licensing, audit configuration, retention policy, workload, and the specific audit event. Tenant-specific validation is required before relying on item-level chain-of-custody.",
+      "canonicalTextSha256": "89e974617fe4611f502d83b01324fd05e317f511707cab551b9b6e8dfd766b2e",
+      "containsPlaceholders": false
+    },
+    {
+      "clauseId": "CL-007",
+      "name": "Restricted Content Discovery caution",
+      "canonicalText": "Restricted Content Discovery should be treated as a SharePoint discoverability control where applicable. Connector search behavior should be validated in the target tenant before assuming restricted content is excluded from connector results.",
+      "canonicalTextSha256": "6e732938d02c9ab4acae496eefac99f9ecd10c8e3cc5bd8454db64c34902429f",
+      "containsPlaceholders": false
+    },
+    {
+      "clauseId": "CL-008",
+      "name": "Risk acceptance trigger",
+      "canonicalText": "Any deviation from the approved runbook, approved user scope, approved permission model, logging posture, training requirement, or sensitive-data boundary must be reviewed before implementation and documented with a Risk Acceptance and Sign-off Form when required.",
+      "canonicalTextSha256": "241d39f4c5cc5ec3b634133fb3d770060f2af634237c59f51a4ab7cf5ebc5e72",
+      "containsPlaceholders": false
+    },
+    {
+      "clauseId": "CL-009",
+      "name": "Escalation trigger",
+      "canonicalText": "Users must stop and escalate when data sensitivity, access scope, prompt suitability, output accuracy, audit evidence, or policy approval is unclear.",
+      "canonicalTextSha256": "44f25676f7e11da206923182a2d8184c809953fe9c4035e05e1024a73dea5ce6",
+      "containsPlaceholders": false
+    },
+    {
+      "clauseId": "CL-010",
+      "name": "System of record limitation",
+      "canonicalText": "[TOOL / CONNECTOR NAME] must not be used as a system of record, archive, official approval mechanism, evidence repository, or final source of truth.",
+      "canonicalTextSha256": "12803b6630939f784edf3a1b89b0838f2e098e5cee94fe1fe9c523ba895b67cb",
+      "containsPlaceholders": true
+    }
+  ]
+}

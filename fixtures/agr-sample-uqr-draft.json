@@ -1,0 +1,211 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactIdentity": {
+    "artifactType": "UQR",
+    "documentId": "ORG-OPS-UQR-901",
+    "version": "v1.0",
+    "classification": "Client-Facing",
+    "approvalStatus": "Draft",
+    "layer": "Delivery"
+  },
+  "context": {
+    "client": "Fixture Client",
+    "engagement": "Governor Fixture Validation",
+    "owner": "Registry Owner",
+    "audience": "Approved end users and frontline managers",
+    "preparedBy": "ORG Consulting, LLC",
+    "reviewDate": null,
+    "reviewDateOverride": null
+  },
+  "sourceWorkflowContext": {
+    "workflowName": "Governor Fixture Generation",
+    "phase": "Draft",
+    "executionId": "GOV-FIXTURE-UQR-901"
+  },
+  "dataInputs": {
+    "placeholderMap": {
+      "[TOOL / CONNECTOR NAME]": "Microsoft 365 Copilot connector",
+      "[CLIENT ORGANIZATION NAME]": "Fixture Client",
+      "[APPROVED USERS]": "Approved pilot users",
+      "[SUPPORT CONTACT]": "ORG Support",
+      "[DATE]": "2026-07-14",
+      "[VERSION]": "v1.0"
+    },
+    "sections": [
+      {
+        "title": "What This Tool Does",
+        "descriptorLine": "Read this before your first session.",
+        "blocks": [
+          {
+            "blockType": "paragraph",
+            "text": "The Microsoft 365 Copilot connector lets approved pilot users search and summarize business content that Fixture Client has already made available through configured connector sources. It returns a first draft, not a finished answer, and it does not replace the systems where that content is stored."
+          }
+        ]
+      },
+      {
+        "title": "Good Uses",
+        "descriptorLine": null,
+        "blocks": [
+          {
+            "blockType": "paragraph",
+            "text": "Use the connector for work where a fast first pass saves time and you can check the result yourself."
+          },
+          {
+            "blockType": "bulletList",
+            "items": [
+              "Finding a document you know exists but cannot locate by name",
+              "Summarizing a long thread or document into a short brief",
+              "Drafting routine business writing that you will edit before sending",
+              "Pulling together talking points from approved internal material"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Do Not Use It For",
+        "descriptorLine": null,
+        "blocks": [
+          {
+            "blockType": "bulletList",
+            "items": [
+              "Final answers that go to a client or a regulator without review",
+              "Anything involving credentials, secrets, or access codes",
+              "Regulated, financial, health, or legal data outside approved scope",
+              "Decisions that need a system of record as the authority"
+            ]
+          },
+          {
+            "blockType": "clauseInsertion",
+            "clauseId": "CL-010"
+          }
+        ]
+      },
+      {
+        "title": "Strong Prompt Pattern",
+        "descriptorLine": null,
+        "blocks": [
+          {
+            "blockType": "paragraph",
+            "text": "A weak prompt produces a vague answer. Give the connector four things and the quality changes immediately."
+          },
+          {
+            "blockType": "table",
+            "columnHeaders": [
+              "Element",
+              "What to supply",
+              "Example"
+            ],
+            "rows": [
+              [
+                "Role",
+                "Who the answer is for",
+                "You are helping a client account manager"
+              ],
+              [
+                "Task",
+                "One verb, one outcome",
+                "Summarize the attached status thread"
+              ],
+              [
+                "Scope",
+                "Where to look and what to leave out",
+                "Use only the linked project folder"
+              ],
+              [
+                "Format",
+                "Shape and length of the answer",
+                "Five bullets, plain language, under 120 words"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Prompt Examples",
+        "descriptorLine": null,
+        "blocks": [
+          {
+            "blockType": "h2",
+            "text": "Rewrite a weak prompt"
+          },
+          {
+            "blockType": "paragraph",
+            "text": "Compare the two columns below. The improved version names the source, the audience, and the output shape, so the connector has no room to guess."
+          },
+          {
+            "blockType": "table",
+            "columnHeaders": [
+              "Weak prompt",
+              "Improved prompt"
+            ],
+            "rows": [
+              [
+                "Summarize this",
+                "Summarize the linked project status thread in five bullets for an account manager, plain language, under 120 words"
+              ],
+              [
+                "Find the onboarding doc",
+                "Find the most recent onboarding checklist in the approved HR folder and give me its title, owner, and last modified date"
+              ],
+              [
+                "Write a follow-up email",
+                "Draft a short follow-up email to a client confirming next week's review meeting, professional tone, no commitments on pricing"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "title": "When to Escalate",
+        "descriptorLine": null,
+        "blocks": [
+          {
+            "blockType": "paragraph",
+            "text": "Stop and ask before you continue if any of the following is true."
+          },
+          {
+            "blockType": "bulletList",
+            "items": [
+              "You are unsure whether the content you are about to supply is sensitive",
+              "The connector returns content you did not expect to have access to",
+              "The output states a fact, figure, or commitment you cannot verify",
+              "You are being asked to rely on the output as evidence or as an approval"
+            ]
+          },
+          {
+            "blockType": "clauseInsertion",
+            "clauseId": "CL-009"
+          }
+        ]
+      },
+      {
+        "title": "Support Contact",
+        "descriptorLine": null,
+        "blocks": [
+          {
+            "blockType": "paragraph",
+            "text": "Route questions about approved use, access, or unexpected results to ORG Support. Route anything involving suspected exposure of sensitive content to the designated security owner immediately, and do not continue the session in the meantime."
+          }
+        ]
+      }
+    ],
+    "normalizedFindings": null,
+    "normalizedRisks": null,
+    "normalizedInventoryEntities": null
+  },
+  "evidenceReferences": null,
+  "dependencies": [
+    { "dependencyId": "ORG-MST-SCL", "kind": "clause-library", "blocking": true }
+  ],
+  "renderingOptions": {
+    "packageName": "Governor Fixture Pack",
+    "outputFileName": "ORG - User Quick Reference - Fixture Client - v1.0.docx",
+    "optionalSectionToggles": null,
+    "stylingProfile": "org-v1.2"
+  },
+  "validationPolicy": {
+    "mode": "draft",
+    "additionalRequiredCheckIds": null,
+    "warningThreshold": null
+  }
+}

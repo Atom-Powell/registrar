@@ -1,0 +1,50 @@
+{
+  "reportVersion": "1.0.0",
+  "executionId": "GOV-2026-07-03-001",
+  "documentId": "ORG-GOV-DS-016",
+  "requestedMode": "draft",
+  "overallResult": "fail",
+  "engineVersion": "2.0.0-slice1",
+  "configVersions": {
+    "agr.schema.json": "65402d5205d10d7f4ccd533a29a69ec8452e784dbeaf44307ad11bcefe06dadf",
+    "artifact-types.json": "42b858fd0fb760bde7c275725fe1098e3162469670e12fecd2acadcb998d5534",
+    "vocabularies.json": "de1b151c34a865dd9d79ed5569d5f1e77c2494e4de2615bf8b60ec1f32d065ab",
+    "clause-library.json": "d0042223c96c56f454a813658097463367ebb7857470c74caa148e8a9f0a2781",
+    "placeholder-dictionary.json": "f447d307aeddc3ceeb4cae6d5bcbe2a138cc1fabcc13c9f00374d01c0e05cbe6",
+    "repository-targets.json": "4267d4f7113b34519d1679dfb49a2479a4f76410cef1729f9862b0b0f1d8d91e",
+    "style-rules.json": "da7e986084eb65a5d005c88e8cf32f9cf95053ffc1d847fe7db7fee169c0ab28"
+  },
+  "timestampUtc": "2026-07-03T12:00:00.0000000+00:00",
+  "checks": [
+    {
+      "checkId": "QA-SPEC-07",
+      "layer": "content",
+      "result": "pass",
+      "severity": "info",
+      "message": "Placeholder coverage for ORG-GOV-DS-016: 10 required, 10 provided, 0 missing, 0 beyond the required set. Missing: none. Beyond required: none.",
+      "jsonPath": "/dataInputs/placeholderMap",
+      "ruleSource": "ORG-MST-SPEC-001 Section 9 item 7"
+    },
+    {
+      "checkId": "QA-SF-07",
+      "layer": "content",
+      "result": "fail",
+      "severity": "blocking",
+      "errorCategory": "MetadataViolation",
+      "message": "Section 'Purpose' has an h3 with no preceding h2 (an H1 to H3 level skip).",
+      "jsonPath": "/dataInputs/sections/0/blocks/1",
+      "expected": "an h2 heading before this h3",
+      "actual": "h3 without a preceding h2",
+      "remediation": "Insert an h2 before the h3 in section 'Purpose', or promote the h3 to h2.",
+      "ruleSource": "ORG-MST-WFE-001 4.5 item 7"
+    },
+    {
+      "checkId": "QA-SPEC-18",
+      "layer": "release",
+      "result": "skipped",
+      "severity": "info",
+      "message": "Registry-update payload applies only at promotion.",
+      "ruleSource": "ORG-MST-SPEC-001 Section 9 item 18"
+    }
+  ]
+}

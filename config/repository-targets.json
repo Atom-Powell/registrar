@@ -1,0 +1,12 @@
+{
+  "$comment": "Repository targets by category for promotion-payload.json. Provisional paths pending ADR-001 ratification; reconciledAgainstAdr001 stays false until the documentation owner confirms the controlled-documents repository structure.",
+  "reconciledAgainstAdr001": false,
+  "targetsByCategory": {
+    "GOV": "Controlled Documents/Governance",
+    "TRN": "Controlled Documents/Training",
+    "RSK": "Controlled Documents/Risk",
+    "OPS": "Controlled Documents/Operational Artifacts",
+    "INT": "Controlled Documents/Internal",
+    "MST": "Controlled Documents/Master Templates"
+  }
+}

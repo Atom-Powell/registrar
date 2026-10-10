@@ -1,0 +1,131 @@
+{
+  "$comment": "Visual identity and content lint rules from ORG-MST-SPEC-001 Sections 4.2-4.3 plus radio-option pattern details from ORG-MST-WFE-001. The renderer consumes 'visualIdentity'; the content validator consumes 'contentLint'. Both are data, not code, so a v1.3 template pack becomes a config change.",
+
+  "visualIdentity": {
+    "fonts": {
+      "heading": { "family": "Montserrat", "weight": "SemiBold", "fallback": "Arial" },
+      "body": { "family": "Montserrat", "weight": "Regular", "fallback": "Arial" },
+      "documentId": { "family": "Consolas", "sizePt": 10, "bold": true, "color": "#000000" }
+    },
+    "colors": {
+      "primaryBlue": "#005CB9",
+      "headingNavy": "#002060",
+      "accentBlue": "#1766C6",
+      "secondaryGray": "#5A6470",
+      "warnRedBorder": "#C0504D",
+      "warnRedFill": "#FBEEEC",
+      "headerRightCellFill": "#E8EEF7",
+      "dchFill": "#F2F5FA",
+      "tableRowAltFill": "#F7F9FC",
+      "borderNeutral": "#B8C1CC"
+    },
+    "colorUsage": {
+      "primaryBlue": ["wordmark line", "primary callout borders", "radio glyphs"],
+      "headingNavy": ["section headings", "callout titles", "DCH labels", "table header fill"],
+      "accentBlue": ["H3 sub-headings", "secondary emphasis"],
+      "secondaryGray": ["italic descriptors", "engagement-name line", "banner labels", "prepared-by closing line"],
+      "warnRed": ["internal notes, warnings, remove-before-client-use callouts ONLY"]
+    },
+    "borders": { "style": "single", "widthHalfPoints": 4, "color": "#B8C1CC" },
+    "page": { "size": "US Letter", "widthIn": 8.5, "heightIn": 11, "marginsIn": 1.0 },
+    "footerTemplate": "Confidential. Internal Working Document | [PACKAGE] | [ARTIFACT] | v[VERSION] | Page X of Y | ORG Consulting, LLC",
+    "wordmark": { "asset": "org-logo.png", "heightIn": 0.55 },
+    "typeScale": { "titlePt": 16, "subtitlePt": 11, "bodyPt": 10, "captionPt": 9, "labelPt": 8 },
+    "spacing": {
+      "bodyAfterPt": 6,
+      "lineSpacingPct": 132,
+      "sectionTitleBeforePt": 16,
+      "sectionTitleAfterPt": 6,
+      "h2BeforePt": 10,
+      "h2AfterPt": 4,
+      "h3BeforePt": 8,
+      "h3AfterPt": 3,
+      "bulletAfterPt": 3,
+      "calloutBeforePt": 8
+    },
+    "headingScale": { "h1Pt": 16, "h2Pt": 13, "h3Pt": 11 },
+    "sectionNumber": { "color": "#005CB9" },
+    "sectionAccent": { "widthHalfPoints": 8, "color": "#005CB9", "gapPoints": 8 },
+    "tableCellMargin": { "topTwips": 40, "bottomTwips": 40, "leftTwips": 90, "rightTwips": 90 },
+    "tableBorders": { "outer": false, "insideHorizontal": true, "insideVertical": false, "widthHalfPoints": 4, "color": "#B8C1CC" },
+    "pagination": { "keepHeadingWithNext": true, "widowControl": true },
+    "dchLabel": { "color": "#5A6470", "uppercase": true, "characterSpacingTwips": 6 }
+  },
+
+  "screen": {
+    "$comment": "Screen-only tokens. Documents must never reference these, and the renderer never reads this block: visualIdentity is the document palette. These exist because three visualIdentity colors are correct in print and fail WCAG as interactive UI. danger #A3282B is a new brand value approved by the repo owner on 2026-08-03, needed because warn red is reserved by colorUsage and QA-SF-09 to mean remove-before-client; it measures 7.25:1 on white and 6.40:1 on warnRedFill. border #7E8B9C replaces borderNeutral, which measures 1.82:1 on white against a 3:1 control-boundary threshold. surface is the plain white used as button fill and as text on danger, introduced for the ORG branding of the window on 2026-10-08. dangerHover #8A2124 is a new brand value for the hover of the solid danger button, approved by the repo owner by merging that change; it measures 9.04:1 against white.",
+    "colors": {
+      "danger": "#A3282B",
+      "border": "#7E8B9C",
+      "surface": "#FFFFFF",
+      "dangerHover": "#8A2124"
+    }
+  },
+
+  "radioOptionPattern": {
+    "glyph": "\u25cb",
+    "glyphCodepoint": "U+25CB",
+    "glyphColor": "#005CB9",
+    "optionsIndented": true,
+    "descriptorLine": "Italic gray line above each question stating question number, single-answer instruction, and required or optional",
+    "descriptorLineFormat": "Question {number}. Select one answer. {requirement}",
+    "requiredLabel": "Required",
+    "optionalLabel": "Optional",
+    "optionIndentTwips": 360,
+    "standardOptionSet": [
+      "Yes, reviewed and acknowledged",
+      "Yes, partial review, follow-up scheduled",
+      "No, blocked by access or timing",
+      "Other or Not applicable"
+    ],
+    "primaryYesAdaptable": true,
+    "minimumOptions": 4,
+    "prohibitedRenderings": ["checkbox", "plain bullet", "dash list", "numbered list"]
+  },
+
+  "warnCallout": {
+    "label": "Warning"
+  },
+
+  "copyReadyMessage": { "label": "Copy-ready message" },
+
+  "contentLint": {
+    "prohibitedCharacters": {
+      "$comment": "Documentary only. The engine's authoritative character policy lives in code (Registrar.Core.CharacterPolicy, check QA-ENG-05) and reads only approvedGlyphAllowlist from this file; the exemplars in this block are illustrative and are NOT parsed. Allowed set: printable Basic Latin U+0020-U+007E and printable Latin-1 Supplement U+00A1-U+00FF EXCLUDING NBSP U+00A0 and soft hyphen U+00AD, plus approvedGlyphAllowlist. Everything else (em dashes, en dashes, emojis, other decorative unicode, C0 and C1 control characters) is rejected. Per Spec 4.2. The transportRepairs map below, unlike this block, IS read by the engine.",
+      "emDash": "\u2014",
+      "enDash": "\u2013",
+      "ellipsisChar": "\u2026",
+      "emojiAndDecorativeUnicode": "reject any codepoint outside Basic Latin, Latin-1 Supplement, and the approved glyph allowlist below"
+    },
+    "transportRepairs": {
+      "$comment": "READ BY THE ENGINE, unlike the documentary prohibitedCharacters block above. Maps a code point that chat surfaces substitute into its approved replacement. ImportParser.Normalize applies these only when the operator explicitly asks for repair. A prohibited code point absent from this map is reported and never replaced: the engine does not guess.",
+      "U+2018": "'",
+      "U+2019": "'",
+      "U+201C": "\"",
+      "U+201D": "\"",
+      "U+2013": "-",
+      "U+2014": "-",
+      "U+2026": "...",
+      "U+00A0": " ",
+      "U+00AD": ""
+    },
+    "approvedGlyphAllowlist": ["\u25cb"],
+    "tokenResidue": { "pattern": "\\[[A-Z0-9][A-Z0-9 ,./()&'-]*\\]", "$comment": "QA-ENG-07: matches the bracketed upper-case placeholder-token shape (for example [CLIENT TENANT NAME / TENANT ID]) so lowercase editorial brackets are not flagged." },
+    "prohibitedPatterns": [
+      { "rule": "no-collapsible-headings", "reason": "Spec 4.2" },
+      { "rule": "no-all-caps-sentences", "reason": "Usage Guide Section 4" },
+      { "rule": "no-colored-body-text", "reason": "Usage Guide Section 4" },
+      { "rule": "no-stacked-italic-descriptors", "reason": "One italic gray intro line per heading maximum" },
+      { "rule": "no-heading-level-skips", "reason": "H1 to H3 without H2 is invalid; H3 is not a decorative subtitle" },
+      { "rule": "no-empty-h1", "reason": "Every H1 must have body content (short-form QA item 7)" },
+      { "rule": "no-warn-callouts-in-client-facing", "reason": "Client-facing artifacts must contain zero warn (red) callouts at promotion (short-form QA item 9)" },
+      { "rule": "no-outline-document-antipattern", "reason": "Reject primarily descriptive content, 'describe your process here' placeholders, or sections that exist only to discuss future content (Master Workspace conversion checklist Phase 4)" }
+    ],
+    "punctuation": { "allowed": ["standard hyphen", "comma", "period", "colon"], "spellingLocale": "en-US" }
+  },
+
+  "fileNaming": {
+    "pattern": "ORG - [Artifact] Template - [Scope] - v[Version].docx",
+    "$comment": "Short-form QA item 12. Generated instances follow the same convention with client scope in the filename, never in the Document ID (client-scoping rule, Spec 5.5)."
+  }
+}

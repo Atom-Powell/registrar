@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactIdentity": {
+    "artifactType": "TCL",
+    "documentId": "ORG-TRN-TCL-001",
+    "version": "v1.0",
+    "classification": "Client-Facing",
+    "approvalStatus": "Draft",
+    "layer": "Delivery"
+  },
+  "context": {
+    "client": "Talewind CPA",
+    "engagement": "Copilot Chat Pilot 2026",
+    "owner": "Registry Owner",
+    "audience": "Trainer, rollout coordinator, security owner, ORG delivery lead",
+    "preparedBy": "ORG Consulting, LLC",
+    "reviewDate": null,
+    "reviewDateOverride": null
+  },
+  "sourceWorkflowContext": {
+    "workflowName": "Copilot Readiness Assessment",
+    "phase": "Training",
+    "executionId": "GOV-2026-07-11-004"
+  },
+  "dataInputs": {
+    "placeholderMap": {
+      "[CLIENT ORGANIZATION NAME]": "Talewind CPA",
+      "[TOOL / CONNECTOR NAME]": "Microsoft Copilot Chat",
+      "[DATE]": "2026-07-11",
+      "[VERSION]": "v1.0"
+    },
+    "sections": [
+      { "title": "Pre-Training Preparation", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "Complete these steps before the training session begins." },
+        { "blockType": "clauseInsertion", "clauseId": "CL-003" }
+      ] },
+      { "title": "Access Validation", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "Confirm each participant can sign in and reach the approved tool." },
+        { "blockType": "clauseInsertion", "clauseId": "CL-004" }
+      ] },
+      { "title": "Required Training Coverage", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "Record coverage for each required topic." },
+        { "blockType": "radioQuestion", "question": {
+          "number": 1,
+          "prompt": "Was the approved-use walkthrough completed?",
+          "required": true,
+          "options": [
+            "Yes, reviewed and acknowledged",
+            "Yes, partial review, follow-up scheduled",
+            "No, blocked by access or timing",
+            "Other or Not applicable"
+          ]
+        } },
+        { "blockType": "radioQuestion", "question": {
+          "number": 2,
+          "prompt": "Was the data-handling boundary reviewed?",
+          "required": true,
+          "options": [
+            "Yes, reviewed and acknowledged",
+            "Yes, partial review, follow-up scheduled",
+            "No, blocked by access or timing",
+            "Other or Not applicable"
+          ]
+        } }
+      ] },
+      { "title": "Demonstration Requirements", "descriptorLine": null, "blocks": [
+        { "blockType": "radioQuestion", "question": {
+          "number": 3,
+          "prompt": "Did the participant demonstrate a governed prompt end to end?",
+          "required": false,
+          "options": [
+            "Yes, reviewed and acknowledged",
+            "Yes, partial review, follow-up scheduled",
+            "No, blocked by access or timing",
+            "Other or Not applicable"
+          ]
+        } }
+      ] },
+      { "title": "Training Completion Record", "descriptorLine": null, "blocks": [
+        { "blockType": "table",
+          "columnHeaders": ["Participant", "Role", "Completed"],
+          "rows": [["Named participant", "Approved user", "Yes"]] }
+      ] },
+      { "title": "Open Follow-Up Items", "descriptorLine": null, "blocks": [
+        { "blockType": "bulletList", "items": [
+          "Schedule a follow-up for any partial review recorded above.",
+          "Record any access blocker with the responsible owner."
+        ] }
+      ] },
+      { "title": "Record Storage Location", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "The completed checklist is stored in the engagement record library." }
+      ] }
+    ],
+    "normalizedFindings": null,
+    "normalizedRisks": null,
+    "normalizedInventoryEntities": null
+  },
+  "evidenceReferences": null,
+  "dependencies": [
+    { "dependencyId": "ORG-MST-SCL", "kind": "clause-library", "blocking": true }
+  ],
+  "renderingOptions": {
+    "packageName": "Governed AI Rollout",
+    "outputFileName": "ORG - Training Checklist - Talewind CPA - v1.0.docx",
+    "optionalSectionToggles": null,
+    "stylingProfile": "org-v1.2"
+  },
+  "validationPolicy": {
+    "mode": "draft",
+    "additionalRequiredCheckIds": null,
+    "warningThreshold": null
+  }
+}

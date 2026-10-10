@@ -1,0 +1,308 @@
+{
+  "$comment": "Artifact type definitions extracted from ORG-MST-SPEC-001 v1.2 Sections 3, 5.2, 5.6, and 6.1-6.9. sectionSchema.status='defined' means the required section list is authoritative from the Spec and order is enforced (ContentValidation). status='not-defined-in-spec' means the Spec provides only the Configuration callout for this type; the engine must refuse to generate that type (ConfigurationError) until a section schema is authored and approved - do NOT invent sections. Types marked generationTarget=false are internal/master-pack types outside Generation Engine v2's initial scope but remain valid for ID validation.",
+
+  "artifactTypes": [
+    {
+      "code": "DS",
+      "name": "Deployment Summary",
+      "category": "GOV",
+      "idPattern": "ORG-GOV-DS-NNN",
+      "classification": "Client-Facing",
+      "layer": "Governance",
+      "governorScope": true,
+      "reviewIntervalMonths": 6,
+      "audienceDefault": "Client leadership, security owner, Microsoft 365 admin, ORG delivery lead",
+      "description": "Summarizes approved deployment posture, access, controls, and validation.",
+      "generationTarget": true,
+      "sectionSchema": {
+        "status": "defined",
+        "orderedSections": [
+          "Purpose",
+          "Deployment Scope",
+          "Access Model",
+          "Control Framework",
+          "Audit, Logging, and Discoverability Validation",
+          "Roles and Responsibilities",
+          "Client Acknowledgment",
+          "Version and Change Notes"
+        ]
+      },
+      "requiredPlaceholders": [
+        "[CLIENT ORGANIZATION NAME]",
+        "[CLIENT TENANT NAME / TENANT ID]",
+        "[APPROVED USER GROUP OR PILOT GROUP]",
+        "[TOOL / CONNECTOR NAME]",
+        "[APPROVED PURPOSE]",
+        "[OUT OF SCOPE USES]",
+        "[DESIGNATED SECURITY OWNER]",
+        "[ORG SUPPORT CONTACT]",
+        "[DATE]",
+        "[VERSION]"
+      ],
+      "requiredClauses": ["CL-006"]
+    },
+    {
+      "code": "AUP",
+      "name": "Acceptable Use Policy",
+      "category": "GOV",
+      "idPattern": "ORG-GOV-AUP-NNN",
+      "classification": "Client-Facing",
+      "layer": "Governance",
+      "governorScope": true,
+      "reviewIntervalMonths": 6,
+      "audienceDefault": "Approved users, client leadership, security owner, compliance owner",
+      "description": "Defines approved use, prohibited use, data handling, and user obligations.",
+      "generationTarget": true,
+      "sectionSchema": {
+        "status": "defined",
+        "orderedSections": [
+          "Purpose",
+          "Approved Use",
+          "Prohibited Use",
+          "Data Handling Requirements",
+          "Output Responsibility",
+          "Audit and Sensitive-Content Validation",
+          "User Acknowledgment",
+          "Escalation Requirements",
+          "Policy Review and Ownership"
+        ]
+      },
+      "requiredPlaceholders": [
+        "[CLIENT ORGANIZATION NAME]",
+        "[TOOL / CONNECTOR NAME]",
+        "[APPROVED USERS]",
+        "[SUPPORT CONTACT]",
+        "[DESIGNATED SECURITY OWNER]",
+        "[DATA TYPES IN SCOPE]",
+        "[DATA TYPES OUT OF SCOPE]",
+        "[CLIENT POLICY REFERENCES]",
+        "[DATE]",
+        "[VERSION]"
+      ],
+      "requiredClauses": ["CL-001", "CL-004", "CL-005", "CL-009"]
+    },
+    {
+      "code": "UQR",
+      "name": "User Quick Reference",
+      "category": "OPS",
+      "idPattern": "ORG-OPS-UQR-NNN",
+      "classification": "Client-Facing",
+      "layer": "Delivery",
+      "governorScope": true,
+      "reviewIntervalMonths": 12,
+      "audienceDefault": "Approved end users and frontline managers",
+      "description": "Plain-language daily-use guide, prompt pattern, and escalation triggers. Single page preferred.",
+      "generationTarget": true,
+      "sectionSchema": {
+        "status": "defined",
+        "orderedSections": [
+          "What This Tool Does",
+          "Good Uses",
+          "Do Not Use It For",
+          "Strong Prompt Pattern",
+          "Prompt Examples",
+          "When to Escalate",
+          "Support Contact"
+        ]
+      },
+      "requiredPlaceholders": null,
+      "requiredClauses": []
+    },
+    {
+      "code": "TCL",
+      "name": "Training Checklist",
+      "category": "TRN",
+      "idPattern": "ORG-TRN-TCL-NNN",
+      "classification": "Client-Facing",
+      "layer": "Delivery",
+      "governorScope": true,
+      "reviewIntervalMonths": 12,
+      "audienceDefault": "Trainer, rollout coordinator, security owner, ORG delivery lead",
+      "description": "Documents preparation, access validation, coverage, and completion evidence. Uses radio-option pattern for coverage items.",
+      "generationTarget": true,
+      "usesRadioOptionPattern": true,
+      "sectionSchema": {
+        "status": "defined",
+        "orderedSections": [
+          "Pre-Training Preparation",
+          "Access Validation",
+          "Required Training Coverage",
+          "Demonstration Requirements",
+          "Training Completion Record",
+          "Open Follow-Up Items",
+          "Record Storage Location"
+        ]
+      },
+      "requiredPlaceholders": null,
+      "requiredClauses": ["CL-003", "CL-004"]
+    },
+    {
+      "code": "TAK",
+      "name": "Training Acknowledgment",
+      "category": "TRN",
+      "idPattern": "ORG-TRN-TAK-NNN",
+      "classification": "Client-Facing",
+      "layer": "Delivery",
+      "governorScope": true,
+      "reviewIntervalMonths": 12,
+      "audienceDefault": "Approved users, trainer, administrator",
+      "description": "Captures per-user training completion and guardrail acceptance. One per user if required.",
+      "generationTarget": true,
+      "sectionSchema": {
+        "status": "defined",
+        "orderedSections": [
+          "Purpose",
+          "Acknowledgment Statements",
+          "Policy Documents Reviewed",
+          "Responsibility Statement",
+          "User Acknowledgment and Signature"
+        ]
+      },
+      "requiredPlaceholders": [
+        "[CLIENT ORGANIZATION NAME]",
+        "[TOOL / CONNECTOR NAME]",
+        "[DATE]",
+        "[VERSION]"
+      ],
+      "requiredClauses": ["CL-001", "CL-004", "CL-005", "CL-009"]
+    },
+    {
+      "code": "TVR",
+      "name": "Training Video Reference / Recording Log",
+      "category": "TRN",
+      "idPattern": "ORG-TRN-TVR-NNN",
+      "classification": null,
+      "reviewIntervalMonths": 12,
+      "generationTarget": false,
+      "sectionSchema": { "status": "not-defined-in-spec", "orderedSections": null }
+    },
+    {
+      "code": "RAF",
+      "name": "Risk Acceptance and Sign-off Form",
+      "category": "RSK",
+      "idPattern": "ORG-RSK-RAF-NNN",
+      "classification": "Controlled Signoff",
+      "layer": "Operational",
+      "governorScope": true,
+      "reviewIntervalMonths": 6,
+      "audienceDefault": "Client security owner, ORG deployer, ORG reviewer, risk owner",
+      "description": "Documents one approved deviation from a runbook, risks, compensating controls, and signatures. Use only when a deviation exists.",
+      "generationTarget": true,
+      "inclusionRule": "Include in a package only when a deviation exists or is being requested (QA item 12).",
+      "sectionSchema": {
+        "status": "defined",
+        "orderedSections": [
+          "Identification",
+          "Description",
+          "Risks Acknowledged",
+          "Compensating Controls",
+          "Review and Sunset",
+          "Sign-off"
+        ]
+      },
+      "requiredPlaceholders": [
+        "[CLIENT ORGANIZATION NAME]",
+        "[CLIENT TENANT NAME / TENANT ID]",
+        "[DATE]",
+        "[VERSION]"
+      ],
+      "requiredClauses": ["CL-008"]
+    },
+    {
+      "code": "ERL",
+      "name": "Exception Register Log",
+      "category": "RSK",
+      "idPattern": "ORG-RSK-ERL-NNN",
+      "classification": null,
+      "reviewIntervalMonths": 6,
+      "generationTarget": false,
+      "sectionSchema": { "status": "not-defined-in-spec", "orderedSections": null }
+    },
+    {
+      "code": "DCN",
+      "name": "Delivery Cover Note",
+      "category": "OPS",
+      "idPattern": "ORG-OPS-DCN-NNN",
+      "classification": "Client-Facing",
+      "layer": "Delivery",
+      "governorScope": true,
+      "reviewIntervalMonths": 12,
+      "audienceDefault": "Client leadership, client contact, ORG delivery lead",
+      "description": "Introduces package contents, identifies required client review items, and provides a suggested delivery message. The suggested delivery message renders as a copyReadyMessage box.",
+      "generationTarget": true,
+      "sectionSchema": {
+        "status": "defined",
+        "orderedSections": [
+          "Purpose",
+          "Package Contents and Required Actions",
+          "Required Client Review Items",
+          "Suggested Delivery Message",
+          "Version and Change Notes"
+        ]
+      },
+      "requiredPlaceholders": [
+        "[CLIENT ORGANIZATION NAME]",
+        "[APPROVED USER GROUP OR PILOT GROUP]",
+        "[DESIGNATED SECURITY OWNER]",
+        "[ORG SUPPORT CONTACT]",
+        "[DATE]",
+        "[VERSION]"
+      ],
+      "requiredClauses": ["CL-006", "CL-007"]
+    },
+    { "code": "SOP", "name": "Standard Operating Procedure", "category": "OPS", "idPattern": "ORG-OPS-SOP-NNN", "classification": null, "reviewIntervalMonths": 12, "generationTarget": false, "sectionSchema": { "status": "not-defined-in-spec", "orderedSections": null } },
+    { "code": "RBK", "name": "Runbook", "category": "OPS", "idPattern": "ORG-OPS-RBK-NNN", "classification": null, "reviewIntervalMonths": 12, "generationTarget": false, "sectionSchema": { "status": "not-defined-in-spec", "orderedSections": null } },
+    { "code": "DQR", "name": "Discovery Questionnaire", "category": "OPS", "idPattern": "ORG-OPS-DQR-NNN", "classification": null, "reviewIntervalMonths": 12, "generationTarget": false, "usesRadioOptionPattern": true, "sectionSchema": { "status": "not-defined-in-spec", "orderedSections": null } },
+    { "code": "ONB", "name": "Onboarding Checklist", "category": "OPS", "idPattern": "ORG-OPS-ONB-NNN", "classification": null, "reviewIntervalMonths": 12, "generationTarget": false, "sectionSchema": { "status": "not-defined-in-spec", "orderedSections": null } },
+    { "code": "OFB", "name": "Offboarding Checklist", "category": "OPS", "idPattern": "ORG-OPS-OFB-NNN", "classification": null, "reviewIntervalMonths": 12, "generationTarget": false, "sectionSchema": { "status": "not-defined-in-spec", "orderedSections": null } },
+    { "code": "LIC", "name": "License Audit Worksheet", "category": "OPS", "idPattern": "ORG-OPS-LIC-NNN", "classification": null, "reviewIntervalMonths": 12, "generationTarget": false, "sectionSchema": { "status": "not-defined-in-spec", "orderedSections": null } },
+    {
+      "code": "PIG",
+      "name": "Package Inventory and Executive Guide",
+      "category": "INT",
+      "idPattern": "ORG-INT-PIG-NNN",
+      "classification": "Internal Working Document",
+      "layer": "Administration",
+      "governorScope": true,
+      "reviewIntervalMonths": 12,
+      "audienceDefault": "ORG delivery lead, engagement owner, documentation owner",
+      "description": "Inventory of the governed artifact types the engine can produce, with an executive summary of availability.",
+      "generationTarget": true,
+      "sectionSchema": {
+        "status": "defined",
+        "orderedSections": [
+          "Purpose",
+          "Deliverable Categories",
+          "Available Deliverables",
+          "Planned Deliverables",
+          "How a Type Becomes Available",
+          "Version and Change Notes"
+        ]
+      },
+      "requiredPlaceholders": null,
+      "requiredClauses": []
+    },
+    { "code": "QAC", "name": "Pre-Delivery QA Checklist", "category": "INT", "idPattern": "ORG-INT-QAC-NNN", "classification": "Internal Working Document", "reviewIntervalMonths": 12, "generationTarget": false, "sectionSchema": { "status": "not-defined-in-spec", "orderedSections": null } },
+    { "code": "PMC", "name": "Package Manifest and ID Registry", "category": "INT", "idPattern": "ORG-INT-PMC-NNN", "classification": "Internal Working Document", "reviewIntervalMonths": 12, "generationTarget": false, "notes": "Registry sheet is the interim source of truth for all ORG Document IDs until the SharePoint list migration (planned Q4 2026 per Spec 5.7).", "sectionSchema": { "status": "not-defined-in-spec", "orderedSections": null } },
+    { "code": "AAT", "name": "Accuracy Audit Trail", "category": "INT", "idPattern": "ORG-INT-AAT-NNN", "classification": "Internal Working Document", "reviewIntervalMonths": 12, "generationTarget": false, "sectionSchema": { "status": "not-defined-in-spec", "orderedSections": null } },
+    { "code": "SPEC", "name": "Master Template System Specification", "category": "MST", "idPattern": "ORG-MST-SPEC-NNN", "classification": "Internal Working Document", "reviewIntervalMonths": 12, "generationTarget": false, "sectionSchema": { "status": "not-defined-in-spec", "orderedSections": null } },
+    { "code": "UG", "name": "Master Template System Usage Guide", "category": "MST", "idPattern": "ORG-MST-UG-NNN", "classification": "Internal Working Document", "reviewIntervalMonths": 12, "generationTarget": false, "sectionSchema": { "status": "not-defined-in-spec", "orderedSections": null } },
+    { "code": "WFE", "name": "Template Conversion Workflow Example", "category": "MST", "idPattern": "ORG-MST-WFE-NNN", "classification": "Internal Working Document", "reviewIntervalMonths": 12, "generationTarget": false, "sectionSchema": { "status": "not-defined-in-spec", "orderedSections": null } },
+    { "code": "SCL", "name": "Shared Clause Library", "category": "MST", "idPattern": "ORG-MST-SCL-NNN", "classification": "Internal Working Document", "layer": "Administration", "reviewIntervalMonths": 12, "generationTarget": true, "sectionSchema": { "status": "defined", "orderedSections": ["Purpose", "How Clauses Are Inserted", "Clause Library", "Version and Change Notes"] } },
+    { "code": "PDX", "name": "Placeholder Dictionary", "category": "MST", "idPattern": "ORG-MST-PDX-NNN", "classification": "Internal Working Document", "layer": "Administration", "reviewIntervalMonths": 12, "generationTarget": true, "sectionSchema": { "status": "defined", "orderedSections": ["Purpose", "How Placeholders Work", "Placeholder Dictionary", "Version and Change Notes"] } }
+  ],
+
+  "universalStructure": {
+    "$comment": "Every generated artifact carries these elements in this order, per Spec Section 4.1. These are code-defined renderer components driven purely by validated metadata - never delegated to LLM content.",
+    "orderedElements": [
+      "Header table (ORG cloud mark + three-line title stack)",
+      "DOCUMENT CONTROL HEADER banner label",
+      "Document Control Header (Row 1: Document ID, Version, Classification, Approval Status; Row 2: Owner, Review Date, Audience, Prepared By)",
+      "Configuration callout (Artifact, Description, Audience, Settings + ID Pattern)",
+      "Numbered body sections per artifact sectionSchema",
+      "Distribution and Follow-up",
+      "Prepared-by and companion-artifact closing line",
+      "Footer (Confidential line | [PACKAGE] | [ARTIFACT] | v[VERSION] | Page X of Y | ORG Consulting, LLC)"
+    ]
+  }
+}

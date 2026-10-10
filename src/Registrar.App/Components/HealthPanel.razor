@@ -1,0 +1,63 @@
+@inject AppState State
+
+@* A button that runs the same self-check the console's doctor verb runs, in window wording. *@
+
+<section class="health-check">
+    <button type="button" class="health" @onclick="RunHealth">Health check</button>
+
+    @if (running)
+    {
+        <p class="notice" role="status">Checking...</p>
+    }
+    @if (problem is not null)
+    {
+        <p class="problem error" role="alert"><Icon Kind="alert" Size="16" />@problem</p>
+    }
+    @if (lines is not null)
+    {
+        <div class="health-output" aria-live="polite">
+            @foreach (var line in lines)
+            {
+                <div class="line @StyleClass(line.Style)">@line.Text</div>
+            }
+        </div>
+    }
+</section>
+
+@code {
+    [Parameter] public string? RegistryPath { get; set; }
+
+    private IReadOnlyList<PresenterLine>? lines;
+    private string? problem;
+    private bool running;
+
+    private static string StyleClass(LineStyle style) => style switch
+    {
+        LineStyle.Pass => "pass",
+        LineStyle.Warn => "warn",
+        LineStyle.Fail => "fail",
+        _ => ""
+    };
+
+    private async Task RunHealth()
+    {
+        if (running) return;
+        problem = null;
+        lines = null;
+        running = true;
+        var registryPath = RegistryPath;
+        try
+        {
+            var report = await Task.Run(() => Doctor.Run(State.RepoRoot, registryPath));
+            lines = DoctorPresenter.Present(report, registryChosen: registryPath is not null);
+        }
+        catch (Exception ex)
+        {
+            problem = "The health check could not run: " + ex.Message;
+        }
+        finally
+        {
+            running = false;
+        }
+    }
+}

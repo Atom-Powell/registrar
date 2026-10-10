@@ -1,0 +1,41 @@
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Components.Web
+@inject NavigationManager Nav
+
+<Router AppAssembly="@typeof(Routes).Assembly">
+    <Found Context="routeData">
+        @* The app-wide net, decided by the owner after GUI-8 established the failure mode
+           and the roadmap closed with no later unit to inherit it. An exception escaping a
+           Blazor event handler in this WPF host is rethrown onto the WPF dispatcher and
+           takes the process down, and "the window vanished" is the least actionable failure
+           this app can produce. Handlers that can fail on the operator's input should still
+           catch and report beside the control the operator just used; this is the floor
+           under all of them: any other handler that throws now costs the screen rather than
+           the session, and says what failed. *@
+        <ErrorBoundary @ref="boundary">
+            <ChildContent>
+                <RouteView RouteData="@routeData" />
+            </ChildContent>
+            <ErrorContent Context="error">
+                <ScreenError Error="error" OnRecover="Recover" />
+            </ErrorContent>
+        </ErrorBoundary>
+    </Found>
+    <NotFound>
+        <p>Not found.</p>
+    </NotFound>
+</Router>
+
+@code {
+    private ErrorBoundary? boundary;
+
+    // Navigate first, then recover. Recovering while still on the route that threw would
+    // re-render the screen that just failed, which for a failure in OnInitialized means
+    // throwing again immediately. The start page holds no state of its own, so it is the one
+    // screen that cannot depend on whatever went wrong.
+    private void Recover()
+    {
+        Nav.NavigateTo("/");
+        boundary?.Recover();
+    }
+}

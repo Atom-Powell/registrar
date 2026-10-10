@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="6.0.0" />
+    <PackageReference Include="JsonSchema.Net" Version="9.2.2" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageReference Include="xunit" Version="2.5.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+    <Using Include="Registrar.TestSupport" />
+    <Using Include="Registrar.Pipeline" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Registrar.Cli\Registrar.Cli.csproj" />
+    <ProjectReference Include="..\..\src\Registrar.Validation\Registrar.Validation.csproj" />
+    <ProjectReference Include="..\..\src\Registrar.Core\Registrar.Core.csproj" />
+    <ProjectReference Include="..\..\src\Registrar.Rendering\Registrar.Rendering.csproj" />
+    <ProjectReference Include="..\..\src\Registrar.Pipeline\Registrar.Pipeline.csproj" />
+  </ItemGroup>
+
+</Project>

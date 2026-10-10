@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ironwright.dev/schemas/registrar/validation-report.schema.json",
+  "title": "ValidationReport",
+  "description": "Engine output consumed by both the operator and the Governor. Design goal: a failed report pasted into the Governor chat must contain enough structure (checkId, jsonPath, expected/actual, remediation) for the Governor to emit a corrected AGR without human interpretation. Every failure names the rule source so corrections trace back to the governing document, not to engine opinion.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["reportVersion", "executionId", "documentId", "requestedMode", "overallResult", "engineVersion", "configVersions", "timestampUtc", "checks"],
+  "properties": {
+    "reportVersion": { "type": "string", "const": "1.0.0" },
+    "executionId": { "type": "string", "description": "Echoes sourceWorkflowContext.executionId from the AGR." },
+    "documentId": { "type": "string" },
+    "requestedMode": { "type": "string", "enum": ["draft", "promotion"] },
+    "overallResult": { "type": "string", "enum": ["pass", "pass-with-warnings", "fail"] },
+    "engineVersion": { "type": "string" },
+    "configVersions": {
+      "type": "object",
+      "description": "Exact config versions loaded for this run, for audit reproducibility.",
+      "additionalProperties": { "type": "string" }
+    },
+    "timestampUtc": { "type": "string", "format": "date-time" },
+    "artifactSha256": { "type": ["string", "null"], "description": "Hash of the emitted DOCX. Null when generation failed before rendering." },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["checkId", "layer", "result", "severity", "message"],
+        "properties": {
+          "checkId": { "type": "string", "description": "Stable ID from qa-checklist.json, e.g. QA-SF-08 or QA-SPEC-14." },
+          "layer": { "type": "string", "enum": ["input", "content", "structural", "release"] },
+          "result": { "type": "string", "enum": ["pass", "warn", "fail", "skipped"] },
+          "severity": { "type": "string", "enum": ["blocking", "warning", "info"] },
+          "errorCategory": {
+            "type": ["string", "null"],
+            "enum": ["ConfigurationError", "SchemaValidationError", "MetadataViolation", "DependencyResolutionError", "ClauseResolutionError", "RegistrySyncError", "LifecycleTransitionError", "RenderingError", "SharePointIntegrationError", "PromotionPolicyError", null]
+          },
+          "message": { "type": "string" },
+          "jsonPath": { "type": ["string", "null"], "description": "Path into the AGR where the offending value lives, when applicable." },
+          "expected": { "type": ["string", "null"] },
+          "actual": { "type": ["string", "null"] },
+          "remediation": { "type": ["string", "null"], "description": "Actionable instruction phrased for the Governor, e.g. 'Replace [CLIENT] with canonical token [CLIENT ORGANIZATION NAME] in dataInputs.placeholderMap and all section blocks.'" },
+          "ruleSource": { "type": ["string", "null"], "description": "Governing document and section, e.g. 'ORG-MST-SPEC-001 5.4'." }
+        }
+      }
+    }
+  }
+}

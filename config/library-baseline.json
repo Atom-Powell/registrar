@@ -1,0 +1,112 @@
+{
+  "baselineVersion": "1.0",
+  "sourceOfTruth": "Governor baseline 2026-08-01 plus follow-up 2026-08-01",
+  "nestingOrder": "category-first",
+
+  "folderTree": [
+    { "path": "Controlled Documents", "createIfEmpty": true, "status": "governed",
+      "ruleSource": "ADR-001 Repository Architecture" },
+    { "path": "Controlled Documents/Governance", "createIfEmpty": true, "status": "governed",
+      "ruleSource": "ADR-002 Governance Layer" },
+    { "path": "Controlled Documents/Operational", "createIfEmpty": true, "status": "unconfirmed",
+      "note": "repository-targets.json says Operational Artifacts. Unresolved owner decision.",
+      "ruleSource": "ADR-002 Operational Layer" },
+    { "path": "Controlled Documents/Training", "createIfEmpty": true, "status": "governed",
+      "ruleSource": "ADR-002 Governance Layer" },
+    { "path": "Controlled Documents/Risk", "createIfEmpty": true, "status": "governed",
+      "ruleSource": "ADR-002 Operational Layer" },
+    { "path": "Controlled Documents/Internal", "createIfEmpty": true, "status": "governed",
+      "ruleSource": "ORG-ID-Registry.xlsx Section 5 category INT" },
+    { "path": "Master Development Workspace", "createIfEmpty": true, "status": "governed",
+      "ruleSource": "ADR-001 Repository Architecture" },
+    { "path": "Architecture Decision Records", "createIfEmpty": true, "status": "governed",
+      "ruleSource": "ADR-001 Repository Architecture" },
+    { "path": "Document Registry", "createIfEmpty": true, "status": "governed",
+      "ruleSource": "ADR-003 Document Registry equals Artifact Catalog" },
+    { "path": "Templates", "createIfEmpty": true, "status": "governed",
+      "ruleSource": "ADR-003 Templates equals Reusable Components" },
+    { "path": "Templates/Approved", "createIfEmpty": true, "status": "governed",
+      "ruleSource": "ORG-MST-SPEC-001 Section 15" },
+    { "path": "Archive", "createIfEmpty": true, "status": "unconfirmed",
+      "note": "Spec Section 15 says _Archive. Deployed library says Archive. Confirm empirically.",
+      "ruleSource": "ORG-MST-SPEC-001 Section 15 vs observed" }
+  ],
+
+  "placementRules": {
+    "decidingFieldsInPriorityOrder": ["approvalStatus", "idCategory"],
+    "mappings": [
+      { "match": { "approvalStatus": "Draft" },
+        "targetPath": "Master Development Workspace",
+        "status": "governed", "ruleSource": "ADR-001 development branch" },
+      { "match": { "approvalStatus": "In Review" },
+        "targetPath": "Master Development Workspace",
+        "status": "governed", "ruleSource": "ADR-001 development branch" },
+      { "match": { "approvalStatus": "Approved", "idCategory": "GOV" },
+        "targetPath": "Controlled Documents/Governance",
+        "status": "governed", "ruleSource": "ADR-002 Governance Layer" },
+      { "match": { "approvalStatus": "Approved", "idCategory": "TRN" },
+        "targetPath": "Controlled Documents/Training",
+        "status": "governed", "ruleSource": "ADR-002 Governance Layer" },
+      { "match": { "approvalStatus": "Approved", "idCategory": "RSK" },
+        "targetPath": "Controlled Documents/Risk",
+        "status": "governed", "ruleSource": "ADR-002 Operational Layer" },
+      { "match": { "approvalStatus": "Approved", "idCategory": "OPS" },
+        "targetPath": "Controlled Documents/Operational",
+        "status": "unconfirmed", "ruleSource": "ADR-002 Operational Layer" },
+      { "match": { "approvalStatus": "Approved", "idCategory": "INT" },
+        "targetPath": "Controlled Documents/Internal",
+        "status": "governed", "ruleSource": "ORG-ID-Registry.xlsx Section 5" },
+      { "match": { "approvalStatus": "Approved", "idCategory": "MST" },
+        "targetPath": "Templates/Approved",
+        "status": "unconfirmed",
+        "note": "ADR-001 and ADR-003 are in tension for MST. Unresolved owner decision.",
+        "ruleSource": "ADR-003 Templates equals Reusable Components" },
+      { "match": { "approvalStatus": "Superseded" },
+        "targetPath": "Archive",
+        "status": "unconfirmed", "ruleSource": "ORG-MST-SPEC-001 Section 15" },
+      { "match": { "approvalStatus": "Retired" },
+        "targetPath": null,
+        "status": "notDefined", "decider": "ADR-001 successor",
+        "ruleSource": "No controlled document names a Retired folder" }
+    ]
+  },
+
+  "dispositions": {
+    "retired":       { "action": "leaveInPlace", "status": "notDefined",
+                       "decider": "ADR-001 successor" },
+    "nonControlled": { "action": "leaveInPlace", "status": "notDefined",
+                       "decider": "ADR or operational runbook",
+                       "$comment": "Reserved and deliberately unread. Nothing in the tool distinguishes a non-controlled file from an unidentified one, and inventing a detection rule would be inventing governance. Wire this key into New-GovPlan only once a controlled document defines what makes a file non-controlled." },
+    "unrecognized":  { "action": "reviewRequired", "status": "notDefined",
+                       "decider": "Registry Owner",
+                       "note": "Owner ruling 2026-08-01: reviewRequired, not escalate. SOP Step 3 is Copilot-assisted human classification, which is what an unidentified file needs. Escalate is reserved for the SOP's stated escalation conditions: ambiguous, sensitive, or unresolvable. Most root files are unidentified, so labelling them all Escalate would make the exception the normal case and train the reader to ignore the report." }
+  },
+
+  "fileNaming": {
+    "status": "notDefined",
+    "template": null,
+    "decider": "ORG-MST-SPEC-001 documentation owner or a new ADR"
+  },
+
+  "identification": {
+    "method": "none",
+    "status": "blocked",
+    "note": "No governed automated method. Identity is resolved by a human in the workbook.",
+    "ruleSource": "Governor follow-up answer 7"
+  },
+
+  "doNotTouch": [
+    { "pattern": "Architecture Decision Records/*",
+      "reason": "Repository history. Reorganization destroys design rationale traceability.",
+      "ruleSource": "ADR-003 Governor Agent Design" },
+    { "pattern": "Document Registry/ORG-ID-Registry.xlsx",
+      "reason": "Authoritative state. No automated process may modify it.",
+      "ruleSource": "ORG-ID-Registry.xlsx Instructions Sections 1 and 2" },
+    { "pattern": "Templates/Approved/*",
+      "reason": "Controlled artifacts. Version changes require a governed registry transition.",
+      "ruleSource": "ORG-MST-SPEC-001 Section 12" },
+    { "pattern": "Document Registry/Blockers/*",
+      "reason": "Active governance blocker records.",
+      "ruleSource": "Observed in library" }
+  ]
+}

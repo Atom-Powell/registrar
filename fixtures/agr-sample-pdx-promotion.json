@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactIdentity": {
+    "artifactType": "PDX",
+    "documentId": "ORG-MST-PDX-001",
+    "version": "v1.0",
+    "classification": "Internal Working Document",
+    "approvalStatus": "In Review",
+    "layer": "Administration"
+  },
+  "context": {
+    "client": "ORG Consulting, LLC",
+    "engagement": "Master Template System Maintenance",
+    "owner": "Registry Owner",
+    "audience": "Documentation owner, engine maintainers",
+    "preparedBy": "ORG Consulting, LLC",
+    "reviewDate": "2026-12-01",
+    "reviewDateOverride": null
+  },
+  "sourceWorkflowContext": {
+    "workflowName": "Master Template System Maintenance",
+    "phase": "Maintenance",
+    "executionId": "GOV-2026-07-20-001"
+  },
+  "dataInputs": {
+    "placeholderMap": {},
+    "sections": [
+      { "title": "Purpose", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "This document is the Placeholder Dictionary reference. It lists every canonical placeholder token the engine recognizes, together with its known drift aliases and where it is used, so any artifact can be checked against the tokens the engine actually validates." }
+      ] },
+      { "title": "How Placeholders Work", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "A placeholder is an uppercase name in square brackets that stands in for a client-specific value. The engine recognizes only the canonical tokens listed here. When Governor-supplied content uses a known drift alias, the engine reports the canonical replacement rather than silently correcting it, so drift is fed back for correction. An unresolved token is permitted with a warning in Draft and is prohibited in a client-facing final document at Promotion." }
+      ] },
+      { "title": "Placeholder Dictionary", "descriptorLine": null, "blocks": [
+        { "blockType": "aggregationTable", "aggregationSource": "placeholderDictionary" }
+      ] },
+      { "title": "Version and Change Notes", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "Version v1.0 is the first published edition of this reference. It reflects the placeholder dictionary as loaded from config at build time. Future editions record added tokens, alias changes, and usage updates as change notes in this section." }
+      ] }
+    ],
+    "normalizedFindings": null,
+    "normalizedRisks": null,
+    "normalizedInventoryEntities": null
+  },
+  "evidenceReferences": null,
+  "dependencies": null,
+  "renderingOptions": {
+    "packageName": "Master Template System",
+    "outputFileName": "ORG - Placeholder Dictionary - v1.2.docx",
+    "optionalSectionToggles": null,
+    "stylingProfile": "org-v1.2"
+  },
+  "validationPolicy": {
+    "mode": "promotion",
+    "additionalRequiredCheckIds": null,
+    "warningThreshold": null
+  }
+}

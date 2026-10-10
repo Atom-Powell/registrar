@@ -1,0 +1,4 @@
+documentId,artifactType,classification,approvalStatus,version,client
+ORG-TRN-TCL-701,TCL,Client-Facing,Draft,v1.0,Northwind Advisory Group
+ORG-GOV-DS-702,DS,Client-Facing,Draft,v1.0,Northwind Advisory Group
+ORG-GOV-AUP-703,AUP,Client-Facing,Draft,v1.0,Northwind Advisory Group

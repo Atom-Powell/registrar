@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ironwright.dev/schemas/registrar/promotion-payload.schema.json",
+  "title": "PromotionPayload",
+  "description": "Registry-update payload and repository target the operator applies before final delivery. Emitted only when validation passes in promotion mode.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["payloadVersion", "executionId", "documentId", "artifactType", "version", "generatedUtc", "registryUpdate", "repositoryTarget", "attestation"],
+  "properties": {
+    "payloadVersion": { "type": "string", "const": "1.0.0" },
+    "executionId": { "type": "string" },
+    "documentId": { "type": "string" },
+    "artifactType": { "type": "string" },
+    "version": { "type": "string" },
+    "generatedUtc": { "type": "string", "format": "date-time" },
+    "registryUpdate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["documentId", "fromStatus", "toStatus", "version"],
+      "properties": {
+        "documentId": { "type": "string" },
+        "fromStatus": { "type": "string" },
+        "toStatus": { "type": "string" },
+        "version": { "type": "string" }
+      }
+    },
+    "repositoryTarget": { "type": "string", "minLength": 1 },
+    "attestation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["checkId", "statement", "requiresOperatorSignoff"],
+      "properties": {
+        "checkId": { "type": "string", "const": "QA-SPEC-18" },
+        "statement": { "type": "string", "minLength": 1 },
+        "requiresOperatorSignoff": { "type": "boolean" }
+      }
+    }
+  }
+}

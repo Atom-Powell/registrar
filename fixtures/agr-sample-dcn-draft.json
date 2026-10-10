@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactIdentity": {
+    "artifactType": "DCN",
+    "documentId": "ORG-OPS-DCN-001",
+    "version": "v1.0",
+    "classification": "Client-Facing",
+    "approvalStatus": "Draft",
+    "layer": "Delivery"
+  },
+  "context": {
+    "client": "Talewind CPA",
+    "engagement": "Copilot Chat Pilot 2026",
+    "owner": "Registry Owner",
+    "audience": "Talewind CPA leadership, client contact, ORG delivery lead",
+    "preparedBy": "ORG Consulting, LLC",
+    "reviewDate": null,
+    "reviewDateOverride": null
+  },
+  "sourceWorkflowContext": {
+    "workflowName": "Copilot Readiness Assessment",
+    "phase": "Delivery",
+    "executionId": "GOV-2026-07-11-002"
+  },
+  "dataInputs": {
+    "placeholderMap": {
+      "[CLIENT ORGANIZATION NAME]": "Talewind CPA",
+      "[APPROVED USER GROUP OR PILOT GROUP]": "Copilot Pilot Group",
+      "[DESIGNATED SECURITY OWNER]": "J. Talewind",
+      "[ORG SUPPORT CONTACT]": "support@orgconsulting.example",
+      "[DATE]": "2026-07-11",
+      "[VERSION]": "v1.0"
+    },
+    "sections": [
+      { "title": "Purpose", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "This cover note introduces the governed delivery package and the actions required to put it into use." }
+      ] },
+      { "title": "Package Contents and Required Actions", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "The package contains the Deployment Summary, Acceptable Use Policy, and User Quick Reference." },
+        { "blockType": "bulletList", "items": [
+          "Deployment Summary: review and confirm the recorded fields.",
+          "Acceptable Use Policy: review, approve, and distribute to approved users.",
+          "User Quick Reference: distribute during rollout training."
+        ] }
+      ] },
+      { "title": "Required Client Review Items", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "Confirm the approved user group, the designated security owner, and the support and escalation contact before the package is treated as final." },
+        { "blockType": "clauseInsertion", "clauseId": "CL-006" },
+        { "blockType": "clauseInsertion", "clauseId": "CL-007" }
+      ] },
+      { "title": "Suggested Delivery Message", "descriptorLine": null, "blocks": [
+        { "blockType": "copyReadyMessage", "text": "Attached is the governed delivery package for the approved pilot. Please review the Deployment Summary fields, approve and distribute the Acceptable Use Policy, and confirm the designated security owner and support contact. Reach out to the ORG delivery lead with any questions before rollout." }
+      ] },
+      { "title": "Version and Change Notes", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "v1.0 initial issue." }
+      ] }
+    ],
+    "normalizedFindings": null,
+    "normalizedRisks": null,
+    "normalizedInventoryEntities": null
+  },
+  "evidenceReferences": null,
+  "dependencies": [
+    { "dependencyId": "ORG-MST-SCL", "kind": "clause-library", "blocking": true }
+  ],
+  "renderingOptions": {
+    "packageName": "Governed AI Rollout",
+    "outputFileName": "ORG - Delivery Cover Note - Talewind CPA - v1.0.docx",
+    "optionalSectionToggles": null,
+    "stylingProfile": "org-v1.2"
+  },
+  "validationPolicy": {
+    "mode": "draft",
+    "additionalRequiredCheckIds": null,
+    "warningThreshold": null
+  }
+}

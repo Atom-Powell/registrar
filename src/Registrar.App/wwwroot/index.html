@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registrar</title>
+    <base href="/" />
+    <!-- Tokens first, then the rules that consume them. app.css references the custom
+         properties declared here and contains no color of its own. -->
+    <link rel="stylesheet" href="org-tokens.css" />
+    <link rel="stylesheet" href="app.css" />
+    <!-- Hidden by default; blazor.webview.js reveals it by setting the inline style
+         "display: block" directly (in NotifyUnhandledException) when an unhandled
+         exception actually occurs. That inline style always wins over this rule, so
+         this is the default state, not a competing mechanism. This does not belong in
+         config/generated/org-tokens.css: that file is regenerated custom-property
+         tokens, not page boilerplate, and would lose this rule on the next
+         emit-tokens run. -->
+    <style>
+        #blazor-error-ui {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">Loading...</div>
+    <div id="blazor-error-ui">
+        An unexpected error has occurred.
+        <a href="" class="reload">Reload</a>
+    </div>
+    <script src="_framework/blazor.webview.js"></script>
+</body>
+</html>

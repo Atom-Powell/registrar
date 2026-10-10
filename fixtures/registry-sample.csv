@@ -1,0 +1,13 @@
+documentId,artifactType,classification,approvalStatus,version,client
+ORG-GOV-DS-016,DS,Client-Facing,Draft,v1.0,"Talewind CPA, LLC"
+ORG-GOV-DS-017,DS,Client-Facing,Retired,v2.0,"Acme, Inc"
+ORG-GOV-AUP-004,AUP,Client-Facing,Draft,v1.0,"Talewind CPA, LLC"
+ORG-OPS-DCN-001,DCN,Client-Facing,Draft,v1.0,"Talewind CPA, LLC"
+ORG-TRN-TAK-001,TAK,Client-Facing,Draft,v1.0,"Talewind CPA, LLC"
+ORG-RSK-RAF-001,RAF,Controlled Signoff,Draft,v1.0,"Talewind CPA, LLC"
+ORG-TRN-TCL-001,TCL,Client-Facing,Draft,v1.0,"Talewind CPA, LLC"
+ORG-OPS-UQR-901,UQR,Client-Facing,Draft,v1.0,Fixture Client
+ORG-GOV-DS-902,DS,Client-Facing,Draft,v1.0,Fixture Client
+ORG-GOV-AUP-903,AUP,Client-Facing,Draft,v1.0,Fixture Client
+ORG-MST-SCL-001,SCL,Internal Working Document,Draft,v1.0,Fixture Client
+ORG-MST-PDX-001,PDX,Internal Working Document,Draft,v1.0,Fixture Client

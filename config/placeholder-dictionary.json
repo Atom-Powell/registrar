@@ -1,0 +1,42 @@
+{
+  "$comment": "Canonical placeholder tokens for the ORG Master Template System. PROVENANCE: the canonical ORG-MST-PDX placeholder dictionary was originally maintained as ORG - Placeholder Dictionary - v1.2.xlsx, which was never among the program source documents and could not be located in the repository or the ORG workspace. On 2026-07-20 the repo owner ruled this file the authoritative placeholder source; the human-readable Placeholder Dictionary reference document (artifact type PDX) is generated from this file. Completeness was verified by a repository token sweep recorded in docs/superpowers/plans/2026-07-20-pdx-placeholder-dictionary.md. Unknown or unresolved tokens warn in Draft and fail (block) on Promotion via PlaceholderLayer (QA-SPEC-07) mode-gating.",
+  "dictionaryId": "ORG-MST-PDX",
+  "dictionaryVersion": "v1.2",
+
+  "tokenRules": {
+    "pattern": "^\\[[A-Z0-9][A-Z0-9 /\\-]*\\]$",
+    "brackets": "square",
+    "case": "uppercase",
+    "unresolvedInClientFacingFinal": "prohibited",
+    "unresolvedInDraft": "permitted-with-warning",
+    "dchFieldsAreNotPlaceholders": "Document ID, Version, Classification, Approval Status, Owner, Review Date, Audience, Prepared By are Document Control Header fields, not placeholders. They must hold real values before the artifact leaves Draft (Spec Section 8)."
+  },
+
+  "canonicalTokens": [
+    { "token": "[CLIENT ORGANIZATION NAME]", "knownDriftAliases": ["[CLIENT]", "[CUSTOMER]", "[ORG NAME]", "[CLIENT NAME]"] },
+    { "token": "[CLIENT TENANT NAME / TENANT ID]", "knownDriftAliases": [] },
+    { "token": "[APPROVED USER GROUP OR PILOT GROUP]", "knownDriftAliases": [] },
+    { "token": "[TOOL / CONNECTOR NAME]", "knownDriftAliases": ["[TOOL]", "[PRODUCT]"] },
+    { "token": "[APPROVED PURPOSE]", "knownDriftAliases": [] },
+    { "token": "[OUT OF SCOPE USES]", "knownDriftAliases": [] },
+    { "token": "[DESIGNATED SECURITY OWNER]", "knownDriftAliases": ["[OWNER]"] },
+    { "token": "[ORG SUPPORT CONTACT]", "knownDriftAliases": [] },
+    { "token": "[SUPPORT CONTACT]", "knownDriftAliases": [] },
+    { "token": "[APPROVED USERS]", "knownDriftAliases": [] },
+    { "token": "[DATA TYPES IN SCOPE]", "knownDriftAliases": [] },
+    { "token": "[DATA TYPES OUT OF SCOPE]", "knownDriftAliases": [] },
+    { "token": "[CLIENT POLICY REFERENCES]", "knownDriftAliases": [] },
+    { "token": "[DATE]", "knownDriftAliases": [] },
+    { "token": "[VERSION]", "knownDriftAliases": [] },
+    { "token": "[PACKAGE]", "knownDriftAliases": [], "usage": "footer" },
+    { "token": "[ARTIFACT]", "knownDriftAliases": [], "usage": "footer" },
+    { "token": "[DOCUMENT TITLE]", "knownDriftAliases": [], "usage": "header table" },
+    { "token": "[CLIENT OR ENGAGEMENT NAME]", "knownDriftAliases": [], "usage": "header table" }
+  ],
+
+  "driftHandling": {
+    "$comment": "When a known drift alias is found in Governor-supplied content, the engine reports a PlaceholderViolation naming the canonical replacement. The engine does not silently auto-correct: auto-correction hides Governor drift instead of feeding it back for correction, which breaks the self-correction loop.",
+    "onKnownAlias": "fail-with-canonical-suggestion",
+    "onUnknownBracketToken": "warn-in-draft, fail-on-promotion"
+  }
+}

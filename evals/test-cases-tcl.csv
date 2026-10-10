@@ -1,0 +1,4 @@
+test_id,artifact_type,document_id,client_name,training_topic,tool_name,audience,learning_objectives,expected_mode
+GOV-TEST-TCL-001,TCL,ORG-TRN-TCL-101,Northvale Financial,Getting Started with Copilot,Microsoft 365 Copilot connector,Approved pilot users,"Understand approved use cases, Identify out-of-scope scenarios, Complete required training acknowledgment",Draft
+GOV-TEST-TCL-002,TCL,ORG-TRN-TCL-102,TechCorp Industries,Data Governance in AI Assistants,Teams and SharePoint connectors,All M365 adopters,"Learn data classification requirements, Apply acceptable use guidelines, Recognize compliance boundaries",Draft
+GOV-TEST-TCL-003,TCL,ORG-TRN-TCL-103,Healthcare Analytics Ltd,Secure AI Use in Healthcare,SharePoint connector,Clinical and administrative staff,"Understand HIPAA implications, Apply data handling requirements, Recognize restricted use patterns",Promotion

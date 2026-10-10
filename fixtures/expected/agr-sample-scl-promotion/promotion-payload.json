@@ -1,0 +1,20 @@
+{
+  "payloadVersion": "1.0.0",
+  "executionId": "GOV-2026-07-16-001",
+  "documentId": "ORG-MST-SCL-001",
+  "artifactType": "SCL",
+  "version": "v1.0",
+  "generatedUtc": "2026-07-03T12:00:00.0000000+00:00",
+  "registryUpdate": {
+    "documentId": "ORG-MST-SCL-001",
+    "fromStatus": "Draft",
+    "toStatus": "In Review",
+    "version": "v1.0"
+  },
+  "repositoryTarget": "Controlled Documents/Master Templates",
+  "attestation": {
+    "checkId": "QA-SPEC-18",
+    "statement": "Operator must apply this registry update to the PMC Registry sheet and confirm post-update state before final delivery.",
+    "requiresOperatorSignoff": true
+  }
+}

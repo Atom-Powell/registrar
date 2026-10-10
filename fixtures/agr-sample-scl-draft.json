@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactIdentity": {
+    "artifactType": "SCL",
+    "documentId": "ORG-MST-SCL-001",
+    "version": "v1.0",
+    "classification": "Internal Working Document",
+    "approvalStatus": "Draft",
+    "layer": "Administration"
+  },
+  "context": {
+    "client": "ORG Consulting, LLC",
+    "engagement": "Master Template System Maintenance",
+    "owner": "Registry Owner",
+    "audience": "Documentation owner, engine maintainers",
+    "preparedBy": "ORG Consulting, LLC",
+    "reviewDate": null,
+    "reviewDateOverride": null
+  },
+  "sourceWorkflowContext": {
+    "workflowName": "Master Template System Maintenance",
+    "phase": "Maintenance",
+    "executionId": "GOV-2026-07-16-001"
+  },
+  "dataInputs": {
+    "placeholderMap": {},
+    "sections": [
+      { "title": "Purpose", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "This document is the Shared Clause Library reference. It lists every canonical clause available to the engine, each identified by its clause ID and proven by its recorded SHA-256 hash, so any artifact that inserts a clause by reference can be checked against this record." }
+      ] },
+      { "title": "How Clauses Are Inserted", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "The engine never accepts clause text supplied by the Governor. An artifact requests a clause by its clause ID only, and the engine inserts the canonical text stored in the clause library, then computes the SHA-256 hash of the inserted text and compares it against the recorded hash for that clause ID. A mismatch fails the build closed, so paraphrase drift cannot reach a rendered document." }
+      ] },
+      { "title": "Clause Library", "descriptorLine": null, "blocks": [
+        { "blockType": "aggregationTable", "aggregationSource": "clauseLibrary" }
+      ] },
+      { "title": "Version and Change Notes", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "Version v1.0 is the first published edition of this reference. It reflects the clause library as loaded from config at build time. Future editions record additions, wording changes, and hash updates to individual clauses as change notes in this section." }
+      ] }
+    ],
+    "normalizedFindings": null,
+    "normalizedRisks": null,
+    "normalizedInventoryEntities": null
+  },
+  "evidenceReferences": null,
+  "dependencies": null,
+  "renderingOptions": {
+    "packageName": "Master Template System",
+    "outputFileName": "ORG - Shared Clause Library - v1.0.docx",
+    "optionalSectionToggles": null,
+    "stylingProfile": "org-v1.2"
+  },
+  "validationPolicy": {
+    "mode": "draft",
+    "additionalRequiredCheckIds": null,
+    "warningThreshold": null
+  }
+}

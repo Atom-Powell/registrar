@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ironwright.dev/schemas/registrar/generation-log.schema.json",
+  "title": "GenerationLog",
+  "description": "Output-package file recording a generation attempt: config provenance, the rules that ran, the clause insertions performed, and the run timestamp. Emitted on build whenever rendering was attempted. Correlated to validation-report.json by executionId. Reproducible under a fixed clock (no wall-clock durations).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["logVersion", "executionId", "documentId", "engineVersion", "requestedMode", "outcome", "timestampUtc", "configVersions", "rulesApplied", "clauseInsertions"],
+  "properties": {
+    "logVersion": { "type": "string", "const": "1.0.0" },
+    "executionId": { "type": "string", "description": "Echoes sourceWorkflowContext.executionId from the AGR; correlates to validation-report.json." },
+    "documentId": { "type": "string" },
+    "engineVersion": { "type": "string" },
+    "requestedMode": { "type": "string", "enum": ["draft", "promotion"] },
+    "outcome": { "type": "string", "enum": ["pass", "pass-with-warnings", "fail"] },
+    "timestampUtc": { "type": "string", "format": "date-time" },
+    "configVersions": {
+      "type": "object",
+      "description": "Exact config versions loaded for this run, for audit reproducibility.",
+      "additionalProperties": { "type": "string" }
+    },
+    "rulesApplied": {
+      "type": "array",
+      "description": "Distinct checkIds evaluated during the run. Full per-check detail lives in validation-report.json.",
+      "items": { "type": "string" }
+    },
+    "clauseInsertions": {
+      "type": "array",
+      "description": "Per-clause insertion audit from the renderer. Empty when the rendered document had no clauseInsertion blocks.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["clauseId", "expectedSha", "actualSha", "verified", "tokensResolved"],
+        "properties": {
+          "clauseId": { "type": "string" },
+          "expectedSha": { "type": "string", "description": "Canonical SHA-256 of the clause text from clause-library.json." },
+          "actualSha": { "type": "string", "description": "SHA-256 of the text actually inserted." },
+          "verified": { "type": "boolean", "description": "True when expectedSha equals actualSha." },
+          "tokensResolved": { "type": "integer", "minimum": 0 }
+        }
+      }
+    }
+  }
+}

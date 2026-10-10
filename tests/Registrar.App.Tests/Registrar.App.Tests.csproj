@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="bunit" Version="1.40.0" />
+    <PackageReference Include="coverlet.collector" Version="6.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageReference Include="xunit" Version="2.5.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+    <Using Include="Registrar.TestSupport" />
+  </ItemGroup>
+
+  <!-- Linked rather than duplicated. The two test projects share no reference, and two
+       copies of a cleanup helper would drift; the prefix in particular has to stay one
+       value, because scripts/clean-test-temp.ps1 matches on it. -->
+  <ItemGroup>
+    <Compile Include="..\Registrar.Tests\TempDir.cs" Link="TempDir.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Registrar.App\Registrar.App.csproj" />
+  </ItemGroup>
+
+</Project>

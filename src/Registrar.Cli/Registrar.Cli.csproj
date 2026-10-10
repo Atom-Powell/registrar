@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Registrar.Validation\Registrar.Validation.csproj" />
+    <ProjectReference Include="..\Registrar.Core\Registrar.Core.csproj" />
+    <ProjectReference Include="..\Registrar.Rendering\Registrar.Rendering.csproj" />
+    <ProjectReference Include="..\Registrar.Pipeline\Registrar.Pipeline.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.CommandLine" Version="3.0.0-preview.5.26302.115" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>registrar</AssemblyName>
+  </PropertyGroup>
+
+</Project>

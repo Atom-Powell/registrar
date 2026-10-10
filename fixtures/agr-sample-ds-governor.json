@@ -1,0 +1,241 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactIdentity": {
+    "artifactType": "DS",
+    "documentId": "ORG-GOV-DS-902",
+    "version": "v1.0",
+    "classification": "Client-Facing",
+    "approvalStatus": "Draft",
+    "layer": "Governance"
+  },
+  "context": {
+    "client": "Fixture Client",
+    "engagement": "Governor Fixture Validation",
+    "owner": "Registry Owner",
+    "audience": "Fixture Client leadership, tenant admin, ORG delivery lead",
+    "preparedBy": "ORG Consulting, LLC",
+    "reviewDate": null,
+    "reviewDateOverride": null
+  },
+  "sourceWorkflowContext": {
+    "workflowName": "Governor Fixture Generation",
+    "phase": "Draft",
+    "executionId": "GOV-FIXTURE-DS-902"
+  },
+  "dataInputs": {
+    "placeholderMap": {
+      "[CLIENT ORGANIZATION NAME]": "Fixture Client",
+      "[CLIENT TENANT NAME / TENANT ID]": "Fixture Tenant",
+      "[APPROVED USER GROUP OR PILOT GROUP]": "Approved pilot users",
+      "[TOOL / CONNECTOR NAME]": "Microsoft 365 Copilot connector",
+      "[APPROVED PURPOSE]": "Approved connector discovery and summarization",
+      "[OUT OF SCOPE USES]": "Credential handling, unapproved sensitive data processing, and final decision automation",
+      "[DESIGNATED SECURITY OWNER]": "Fixture Security Owner",
+      "[ORG SUPPORT CONTACT]": "ORG Support",
+      "[DATE]": "2026-07-14",
+      "[VERSION]": "v1.0"
+    },
+    "sections": [
+      {
+        "title": "Purpose",
+        "descriptorLine": "Approved deployment posture for the connector pilot.",
+        "blocks": [
+          {
+            "blockType": "paragraph",
+            "text": "This Deployment Summary records the approved posture for the Microsoft 365 Copilot connector at Fixture Client. It states what was deployed, who may use it, which controls apply, and what the client is acknowledging. It is a governance record of the deployment as approved, not a configuration guide."
+          }
+        ]
+      },
+      {
+        "title": "Deployment Scope",
+        "descriptorLine": null,
+        "blocks": [
+          {
+            "blockType": "paragraph",
+            "text": "Scope is limited to the approved pilot group in the Fixture Tenant environment. Anything not listed as in scope below is out of scope, and expanding scope requires a new approval rather than an operational decision."
+          },
+          {
+            "blockType": "table",
+            "columnHeaders": [
+              "Dimension",
+              "In scope",
+              "Out of scope"
+            ],
+            "rows": [
+              [
+                "Users",
+                "Approved pilot users only",
+                "General staff, contractors, and external guests"
+              ],
+              [
+                "Purpose",
+                "Approved connector discovery and summarization",
+                "Credential handling and final decision automation"
+              ],
+              [
+                "Content",
+                "Business content in configured connector sources",
+                "Regulated, health, legal, and client-confidential data"
+              ],
+              [
+                "Environment",
+                "Fixture Tenant production tenant",
+                "Any other tenant or unmanaged device"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Access Model",
+        "descriptorLine": null,
+        "blocks": [
+          {
+            "blockType": "paragraph",
+            "text": "Access is granted through the approved pilot group and through managed business accounts only. Membership changes flow through the designated security owner, so the access boundary stays reviewable rather than drifting through ad hoc grants."
+          },
+          {
+            "blockType": "bulletList",
+            "items": [
+              "Group membership is the single point of access control",
+              "Access requests are approved by the designated security owner",
+              "Removal from the group revokes access at the next sign-in",
+              "Shared and service accounts are not permitted in the pilot"
+            ]
+          },
+          {
+            "blockType": "clauseInsertion",
+            "clauseId": "CL-002"
+          }
+        ]
+      },
+      {
+        "title": "Control Framework",
+        "descriptorLine": null,
+        "blocks": [
+          {
+            "blockType": "paragraph",
+            "text": "The controls below were agreed before deployment and are the baseline against which the pilot is reviewed."
+          },
+          {
+            "blockType": "table",
+            "columnHeaders": [
+              "Control",
+              "Implementation",
+              "Owner"
+            ],
+            "rows": [
+              [
+                "Access boundary",
+                "Approved pilot group with managed accounts",
+                "Fixture Security Owner"
+              ],
+              [
+                "Acceptable use",
+                "Signed acceptable use policy before first access",
+                "Fixture Security Owner"
+              ],
+              [
+                "Training",
+                "Required training completed and recorded",
+                "ORG delivery lead"
+              ],
+              [
+                "Audit posture",
+                "Tenant audit logging validated before reliance",
+                "Tenant admin"
+              ]
+            ]
+          },
+          {
+            "blockType": "clauseInsertion",
+            "clauseId": "CL-010"
+          }
+        ]
+      },
+      {
+        "title": "Audit, Logging, and Discoverability Validation",
+        "descriptorLine": null,
+        "blocks": [
+          {
+            "blockType": "paragraph",
+            "text": "Audit visibility was reviewed during deployment. What follows is a statement of the limits on that visibility, so that no party assumes an evidentiary capability that has not been validated in this tenant."
+          },
+          {
+            "blockType": "clauseInsertion",
+            "clauseId": "CL-006"
+          }
+        ]
+      },
+      {
+        "title": "Roles and Responsibilities",
+        "descriptorLine": null,
+        "blocks": [
+          {
+            "blockType": "table",
+            "columnHeaders": [
+              "Role",
+              "Responsibility"
+            ],
+            "rows": [
+              [
+                "Designated security owner",
+                "Approves access, owns the access boundary, receives escalations"
+              ],
+              [
+                "Tenant admin",
+                "Maintains configuration and validates audit logging"
+              ],
+              [
+                "Approved pilot users",
+                "Use the connector within approved purpose and verify all output"
+              ],
+              [
+                "ORG delivery lead",
+                "Delivers training, maintains this record, supports the pilot"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Client Acknowledgment",
+        "descriptorLine": null,
+        "blocks": [
+          {
+            "blockType": "paragraph",
+            "text": "By accepting this Deployment Summary, Fixture Client acknowledges the scope, access model, control framework, and audit limitations recorded above, and accepts that any deviation from them requires review before implementation."
+          }
+        ]
+      },
+      {
+        "title": "Version and Change Notes",
+        "descriptorLine": null,
+        "blocks": [
+          {
+            "blockType": "paragraph",
+            "text": "v1.0 initial issue. This record is reviewed at least every six months, or sooner if scope, access model, or control posture changes."
+          }
+        ]
+      }
+    ],
+    "normalizedFindings": null,
+    "normalizedRisks": null,
+    "normalizedInventoryEntities": null
+  },
+  "evidenceReferences": null,
+  "dependencies": [
+    { "dependencyId": "ORG-MST-SCL", "kind": "clause-library", "blocking": true }
+  ],
+  "renderingOptions": {
+    "packageName": "Governor Fixture Pack",
+    "outputFileName": "ORG - Deployment Summary - Fixture Client - v1.0.docx",
+    "optionalSectionToggles": null,
+    "stylingProfile": "org-v1.2"
+  },
+  "validationPolicy": {
+    "mode": "draft",
+    "additionalRequiredCheckIds": null,
+    "warningThreshold": null
+  }
+}

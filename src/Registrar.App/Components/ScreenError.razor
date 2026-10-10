@@ -1,0 +1,27 @@
+@* What the operator sees when a screen could not continue. Rule 7 is the bar: a failure
+   produces something a reader can act on, never a stack trace, and never silence. So the
+   underlying message is shown rather than a generic apology, and the way out is a control
+   rather than an instruction to restart the app.
+
+   A separate component rather than markup inlined into Routes.razor's ErrorContent, so the
+   fallback can be rendered and asserted on its own. Recovery is the caller's, because only
+   the caller holds the ErrorBoundary this content is standing in for. *@
+
+<section class="screen-error">
+    <h1>That screen could not continue</h1>
+
+    <p class="what">@Error.Message</p>
+
+    <p class="advice">
+        Nothing further was written by the step that failed. Anything already saved is still
+        on disk. Go back and try again; if it happens again, send this message along with the
+        file you were working on.
+    </p>
+
+    <button class="recover" @onclick="OnRecover">Back to the start</button>
+</section>
+
+@code {
+    [Parameter] public Exception Error { get; set; } = default!;
+    [Parameter] public EventCallback OnRecover { get; set; }
+}

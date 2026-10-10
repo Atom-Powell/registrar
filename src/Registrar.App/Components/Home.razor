@@ -1,0 +1,214 @@
+@page "/"
+@using System.IO
+@inject AppState State
+@inject IAgrRunner Runner
+@inject IOperatorHost Host
+@inject SettingsStore Store
+
+@* The whole window. Everything with a rule in it lives in Registrar.Pipeline; this page
+   chooses, calls and shows. Every handler that touches a picker, the runner, a settings
+   file, the clipboard or a path catches and says so beside the controls, because an
+   exception escaping a Blazor handler in this WPF host takes the process down. *@
+
+<header class="brand"><img class="brand-mark" src="org-logo.png" alt="ORG" width="26" height="27" /><span class="brand-rule" aria-hidden="true"></span><h1>The Registrar</h1></header>
+
+<section class="step" aria-labelledby="step-folder">
+    <h2 id="step-folder">1. Your working folder</h2>
+    <p class="path">@(folder ?? "No folder chosen yet.")</p>
+    <button type="button" class="choose-folder" disabled="@running" @onclick="ChooseFolder">Choose folder</button>
+</section>
+
+<section class="step" aria-labelledby="step-registry">
+    <h2 id="step-registry">2. ID registry (optional)</h2>
+    <p class="path">@(registry ?? "No registry chosen.")</p>
+    @if (registry is null)
+    {
+        <p class="hint">Without one, the registry check is skipped in a draft and fails a promotion build.</p>
+    }
+    <button type="button" class="choose-registry" disabled="@running" @onclick="ChooseRegistry">Choose registry file</button>
+    @if (registry is not null)
+    {
+        <button type="button" class="clear-registry" disabled="@running" @onclick="ClearRegistry">Clear</button>
+    }
+</section>
+
+<fieldset class="step files">
+    <legend>3. The file to check</legend>
+    @if (files.Count == 0)
+    {
+        @if (folder is null)
+        {
+            <p class="notice">Choose a working folder to see its files, or add a file.</p>
+        }
+        else
+        {
+            <p class="notice">No .json files in this folder yet. Choose another folder, or add a file.</p>
+        }
+    }
+    @foreach (var file in files)
+    {
+        var path = file;
+        <label class="file">
+            <input type="radio" name="agr" checked="@(path == selected)" disabled="@running" @onchange="() => Select(path)" />
+            @Path.GetFileName(path)
+        </label>
+    }
+    <button type="button" class="add-file" disabled="@running" @onclick="AddFile">Add a file...</button>
+</fieldset>
+
+@if (selected is not null)
+{
+    <p class="mode">@AgrMode.Describe(mode)</p>
+}
+
+<div class="actions">
+    <button type="button" class="check primary" disabled="@(!CanRun)" @onclick="() => Run(false)">Check</button>
+    <button type="button" class="build primary" disabled="@(!CanRun)" @onclick="() => Run(true)">Build</button>
+</div>
+
+@if (problem is not null)
+{
+    <p class="problem error" role="alert"><Icon Kind="alert" Size="16" />@problem</p>
+}
+
+@if (running)
+{
+    <p class="notice" role="status">Working...</p>
+}
+
+@if (result is not null)
+{
+    <ResultPanel Result="@result" />
+}
+
+<HealthPanel RegistryPath="@registry" />
+
+@code {
+    private MenuSettings settings = new();
+    private string? folder;
+    private string? registry;
+    private List<string> files = new();
+    private string? selected;
+    private string? mode;
+    private bool running;
+    private AgrFileRunResult? result;
+    private string? problem;
+
+    private bool CanRun => selected is not null && !running;
+
+    protected override void OnInitialized()
+    {
+        try
+        {
+            settings = Store.Load();
+            folder = settings.LastFolder;
+            registry = settings.RegistryPath;
+            Rescan();
+        }
+        catch (Exception ex)
+        {
+            problem = "Your saved settings could not be read: " + ex.Message;
+        }
+    }
+
+    // Recent files first, then the folder's own .json files; a pure listing in Pipeline.
+    private void Rescan()
+    {
+        files = AgrPicker.Candidates(folder ?? "", settings.RecentAgrs, excludeOutputs: true).ToList();
+        if (selected is null || !files.Contains(selected))
+            Select(files.Count > 0 ? files[0] : null);
+    }
+
+    private void Select(string? path)
+    {
+        selected = path;
+        mode = path is null ? null : AgrMode.TryRead(path);
+        result = null;
+    }
+
+    private void Remember(MenuSettings next)
+    {
+        settings = next;
+        Store.Save(settings);
+    }
+
+    private void ChooseFolder()
+    {
+        problem = null;
+        try
+        {
+            var chosen = Host.PickFolder(folder);
+            if (chosen is null) return;
+            folder = chosen;
+            Rescan();
+            Remember(settings.WithFolder(chosen));
+        }
+        catch (Exception ex) { problem = "The folder could not be chosen: " + ex.Message; }
+    }
+
+    private void ChooseRegistry()
+    {
+        problem = null;
+        try
+        {
+            var chosen = Host.PickRegistryFile(folder);
+            if (chosen is null) return;
+            registry = chosen;
+            Remember(settings.WithRegistry(chosen));
+        }
+        catch (Exception ex) { problem = "The registry file could not be chosen: " + ex.Message; }
+    }
+
+    private void ClearRegistry()
+    {
+        problem = null;
+        try
+        {
+            registry = null;
+            Remember(settings.WithRegistry(null));
+        }
+        catch (Exception ex) { problem = "The registry setting could not be cleared: " + ex.Message; }
+    }
+
+    private void AddFile()
+    {
+        problem = null;
+        try
+        {
+            var chosen = Host.PickAgrFile(folder);
+            if (chosen is null) return;
+            Remember(settings.WithRecent(chosen));
+            Rescan();
+            Select(chosen);
+        }
+        catch (Exception ex) { problem = "The file could not be added: " + ex.Message; }
+    }
+
+    private async Task Run(bool build)
+    {
+        if (selected is null || running) return;
+
+        problem = null;
+        result = null;
+        running = true;
+        var path = selected;
+        var registryPath = registry;
+
+        try
+        {
+            // The engine is synchronous and a build renders a document, so it runs off the
+            // UI thread; the buttons stay disabled until it returns.
+            result = await Task.Run(() => build ? Runner.Build(path, registryPath) : Runner.Check(path, registryPath));
+            Remember(settings.WithRecent(path));
+            files = AgrPicker.Candidates(folder ?? "", settings.RecentAgrs, excludeOutputs: true).ToList();
+        }
+        catch (Exception ex)
+        {
+            problem = "Something went wrong after the run: " + ex.Message;
+        }
+        finally
+        {
+            running = false;
+        }
+    }
+}

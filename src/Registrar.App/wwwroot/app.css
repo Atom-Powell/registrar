@@ -1,0 +1,397 @@
+/* The screen's own rules. Every color here is a var(--org-*) reference into
+   config/generated/org-tokens.css, which registrar emit-tokens produces from
+   config/style-rules.json. There is no hex literal in this file and there must never be
+   one: a hand-maintained color is the first crack in "the screen is on brand because it
+   reads the brand, not because it was decorated".
+
+   Which group a token comes from is not interchangeable, and the generated file says so
+   at the top of each group.
+
+   - Control boundaries use --org-border. --org-border-neutral is the document token it
+     replaces for that job: at 1.82:1 on white it fails the 3:1 control-boundary
+     threshold, so it must not be used on anything interactive.
+   - Text uses the four document tokens validated as text on white: --org-heading-navy,
+     --org-primary-blue, --org-accent-blue and --org-secondary-gray.
+   - --org-surface is the white of a button fill and of text on a solid --org-danger fill.
+     --org-danger-hover is the darker danger shade the solid Copy failures button takes on
+     hover. Both are screen tokens, so no color name or literal is typed in this file.
+   - Error and not-found text uses --org-danger, the screen token that exists precisely
+     so the screen does not borrow warn red, which colorUsage and QA-SF-09 reserve in a
+     document to mean remove-before-client. The style-rules screen block records danger
+     as 7.25:1 on white and 6.40:1 on --org-warn-red-fill, so that pairing is measured.
+
+   No page background is declared. Every contrast figure above is measured against white,
+   which is the user agent default; --org-surface is that same white, used only as a
+   control fill, never as a page background (docs/tech-debt.md entry 56). */
+
+/* Light only: every contrast figure here is measured on white. */
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  padding: 0 1.5rem 2rem;
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--org-heading-navy);
+}
+
+h1 {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 1.25rem 0 0.75rem;
+  color: var(--org-heading-navy);
+}
+
+/* Inline icons draw with currentColor; the parent that owns the status color sets it. */
+
+svg.icon {
+  flex: none;
+}
+
+/* The brand lockup: ORG mark, a 1px rule, then the title, inline and top left. */
+
+header.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 1.25rem 0 18px;
+}
+
+header.brand h1 {
+  margin: 0;
+}
+
+.brand-mark {
+  display: block;
+  height: 26px;
+  width: auto;
+}
+
+.brand-rule {
+  flex: none;
+  width: 1px;
+  height: 22px;
+  background: var(--org-border-neutral);
+}
+
+/* The error line a screen shows when its own work threw. */
+
+.error {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 14px 0;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--org-danger);
+  background: var(--org-warn-red-fill);
+  border-left: 4px solid var(--org-danger);
+}
+
+.error svg.icon {
+  margin-top: 1px;
+}
+
+/* An informational line a screen can show the operator. Not an error, so it does not
+   borrow --org-danger or the warn-red tokens QA-SF-09 reserves in a document to mean
+   remove-before-client; it uses an informational pairing of its own instead. */
+
+.notice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 14px 0;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--org-primary-blue);
+  background: var(--org-dch-fill);
+  border-left: 4px solid var(--org-accent-blue);
+}
+
+/* The step 3 empty-state sentence is plain text, not a callout. */
+
+fieldset.files .notice {
+  display: block;
+  margin: 10px 0;
+  padding: 0;
+  color: var(--org-heading-navy);
+  background: none;
+  border: 0;
+}
+
+/* The framework's unhandled-exception banner. Deliberately declares no display property:
+   index.html hides it by default and blazor.webview.js reveals it with an inline style,
+   and a display rule here would join a mechanism that already works. */
+
+#blazor-error-ui {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.6rem 1.5rem;
+  color: var(--org-danger);
+  background: var(--org-warn-red-fill);
+  border-top: 2px solid var(--org-danger);
+}
+
+#blazor-error-ui .reload {
+  margin-left: 0.5rem;
+  color: var(--org-danger);
+  text-decoration: underline;
+}
+
+/* The one-page window. Spacing groups first, then controls, then the result. */
+
+.step,
+.actions,
+.result {
+  margin: 16px 0;
+  padding: 0;
+}
+
+.step h2,
+legend {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--org-heading-navy);
+}
+
+.step h2 {
+  margin: 0 0 8px;
+}
+
+fieldset.step {
+  border: 1px solid var(--org-border);
+  border-radius: 6px;
+  padding: 6px 16px 16px;
+}
+
+legend {
+  padding: 0 4px;
+}
+
+.path {
+  margin: 0 0 10px;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 12.5px;
+  color: var(--org-secondary-gray);
+  word-break: break-all;
+}
+
+.path:has(+ .hint) {
+  margin-bottom: 6px;
+}
+
+.hint {
+  margin: 0 0 10px;
+  font-size: 12.5px;
+  color: var(--org-secondary-gray);
+}
+
+/* Ghost buttons are the default; primary and copy-failures override below. */
+
+button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 10px 0.25rem 0;
+  padding: 8px 16px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--org-heading-navy);
+  background: var(--org-surface);
+  border: 1px solid var(--org-border);
+  border-radius: 6px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--org-table-row-alt-fill);
+}
+
+button.primary {
+  padding: 8px 18px;
+  font-weight: 700;
+  color: var(--org-primary-blue);
+  background: var(--org-dch-fill);
+  border: 2px solid var(--org-primary-blue);
+}
+
+button.primary:hover {
+  background: var(--org-header-right-cell-fill);
+}
+
+button.copy-failures {
+  padding: 9px 18px;
+  font-weight: 700;
+  color: var(--org-surface);
+  background: var(--org-danger);
+  border: 2px solid var(--org-danger);
+}
+
+button.copy-failures:hover {
+  background: var(--org-danger-hover);
+  border-color: var(--org-danger-hover);
+}
+
+button:disabled,
+input:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+button:disabled:hover {
+  background: var(--org-surface);
+}
+
+button.primary:disabled:hover {
+  background: var(--org-dch-fill);
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--org-accent-blue);
+  outline-offset: 2px;
+}
+
+button.primary:focus-visible,
+button.copy-failures:focus-visible {
+  outline-offset: 3px;
+}
+
+fieldset.files button {
+  margin-top: 8px;
+}
+
+label.file {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 34px;
+  padding: 4px 6px;
+  box-sizing: border-box;
+  font-size: 13px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+label.file:has(input:checked) {
+  font-weight: 600;
+}
+
+label.file:has(input:disabled) {
+  cursor: default;
+}
+
+label.file input[type="radio"] {
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  accent-color: var(--org-primary-blue);
+}
+
+.mode {
+  margin: 14px 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--org-heading-navy);
+}
+
+/* The result: a quiet rule above, then the banner, the report lines and the actions. */
+
+.result {
+  padding-top: 18px;
+  border-top: 1px solid var(--org-header-right-cell-fill);
+}
+
+.report .line,
+.health-output .line {
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 12.5px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+.report {
+  margin-bottom: 14px;
+}
+
+.report .line {
+  padding-left: 16px;
+}
+
+.line.fail {
+  color: var(--org-danger);
+}
+
+.line.pass {
+  color: var(--org-primary-blue);
+}
+
+.line.warn {
+  color: var(--org-heading-navy);
+  font-weight: 700;
+}
+
+.report .line.banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  padding: 10px 0 10px 16px;
+  font-family: inherit;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--org-heading-navy);
+  border-left: 6px solid var(--org-heading-navy);
+}
+
+.report .line.banner[data-status="pass"] {
+  color: var(--org-primary-blue);
+  border-left-color: var(--org-primary-blue);
+}
+
+.report .line.banner[data-status="warn"] {
+  color: var(--org-heading-navy);
+  border-left-color: var(--org-heading-navy);
+}
+
+.report .line.banner[data-status="fail"] {
+  padding-right: 16px;
+  color: var(--org-danger);
+  background: var(--org-warn-red-fill);
+  border-left-color: var(--org-danger);
+  border-radius: 0 4px 4px 0;
+}
+
+.summary {
+  margin: 0 0 16px;
+  font-size: 13px;
+}
+
+.health-check {
+  margin-top: 22px;
+  padding-top: 14px;
+  border-top: 1px solid var(--org-border);
+}
+
+.health-check button.health {
+  margin-bottom: 14px;
+}
+
+.health-output {
+  font-family: Consolas, "Courier New", monospace;
+}
+
+.result .error,
+.problem {
+  white-space: pre-wrap;
+}

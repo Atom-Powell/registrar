@@ -1,0 +1,4 @@
+test_id,artifact_type,document_id,client_name,engagement_name,tool_name,approved_purpose,security_owner,support_contact,expected_mode
+GOV-TEST-DS-001,DS,ORG-GOV-DS-901,Northvale Financial,Copilot Pilot Phase 1,Microsoft 365 Copilot connector,Approved connector discovery and summarization,Northvale Security Team,ORG Support (support@org.example.com),Draft
+GOV-TEST-DS-002,DS,ORG-GOV-DS-902,TechCorp Industries,M365 Adoption Wave 2,Teams message search connector,Internal communication analysis and summarization,TechCorp CISO,ORG Technical Support,Draft
+GOV-TEST-DS-003,DS,ORG-GOV-DS-903,Healthcare Analytics Ltd,Secure Data Governance,SharePoint content discovery,Approved internal documentation search,Healthcare Security Officer,ORG Consulting Support Team,Promotion

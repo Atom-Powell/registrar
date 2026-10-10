@@ -1,0 +1,76 @@
+{
+  "$comment": "Controlled vocabularies extracted from ORG-MST-SPEC-001 v1.2 (Sections 5.2, 5.4, 5.6) and ADR layer model. These are closed sets. The engine must reject any value outside these lists (MetadataViolation) and any lifecycle transition not listed in approvalStatus.transitions (LifecycleTransitionError).",
+  "sourceOfTruth": "ORG-MST-SPEC-001 v1.2",
+
+  "classification": [
+    "Client-Facing",
+    "Controlled Signoff",
+    "Internal Working Document"
+  ],
+
+  "approvalStatus": {
+    "values": ["Draft", "In Review", "Approved", "Superseded", "Retired"],
+    "transitions": {
+      "$comment": "Allowed next states per Spec 5.4. Absent key or absent target = prohibited transition. Superseded and Retired are terminal.",
+      "Draft": ["In Review", "Retired"],
+      "In Review": ["Draft", "Approved", "Retired"],
+      "Approved": ["Superseded", "Retired"],
+      "Superseded": [],
+      "Retired": []
+    },
+    "initialState": "Draft",
+    "prohibitedAliases": ["Final", "Published", "Archived"]
+  },
+
+  "category": {
+    "values": ["GOV", "TRN", "RSK", "OPS", "INT", "MST"],
+    "reviewIntervalMonths": {
+      "$comment": "Category defaults per Spec 5.6. Shorter is always permitted. Longer than 12 months requires documentation owner sign-off recorded in the request (reviewDateOverride).",
+      "GOV": 6,
+      "RSK": 6,
+      "TRN": 12,
+      "OPS": 12,
+      "INT": 12,
+      "MST": 12
+    }
+  },
+
+  "documentId": {
+    "pattern": "^ORG-(GOV-(DS|AUP)|TRN-(TCL|TAK|TVR)|RSK-(RAF|ERL)|OPS-(UQR|DCN|SOP|RBK|DQR|ONB|OFB|LIC)|INT-(PIG|QAC|PMC|AAT)|MST-(SPEC|UG|WFE|SCL|PDX))-[0-9]{3}$",
+    "$comment": "Pattern encodes only the valid category/artifact-code pairings from Spec 5.2, so an ID like ORG-GOV-TCL-001 fails at schema level, not just semantically. Serials: three-digit, zero-padded, monotonic per artifact-code namespace, never reused, never reset per client/engagement/year. IDs persist across versions; a new ID is issued only on material scope/type/category change.",
+    "renderingFont": "Consolas 10pt bold"
+  },
+
+  "version": {
+    "pattern": "^v[0-9]+\\.[0-9]+$",
+    "initial": "v1.0",
+    "$comment": "Semantic version string per Spec examples (v1.0, v1.1, v2.0). Minor bump: wording/placeholder/formatting. Major bump: governance posture, signoff requirements, risk triggers, or artifact structure. 'initial' is the version a newly authored artifact starts at."
+  },
+
+  "frameworkLayer": {
+    "$comment": "Per ADR-002 layer model referenced by the Arti-Generator spec. The engine itself is an Administration-layer capability.",
+    "values": ["Governance", "Operational", "Delivery", "Administration"]
+  },
+
+  "placeholderToken": {
+    "pattern": "^\\[[A-Z0-9][A-Z0-9 /\\-]*\\]$",
+    "$comment": "Square brackets, uppercase labels, per Spec Section 8. Canonical names only; local variants are a PlaceholderViolation."
+  },
+
+  "isoDate": {
+    "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+  },
+
+  "errorCategories": [
+    "ConfigurationError",
+    "SchemaValidationError",
+    "MetadataViolation",
+    "DependencyResolutionError",
+    "ClauseResolutionError",
+    "RegistrySyncError",
+    "LifecycleTransitionError",
+    "RenderingError",
+    "SharePointIntegrationError",
+    "PromotionPolicyError"
+  ]
+}

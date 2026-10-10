@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ironwright.dev/schemas/registrar/artifact-manifest.schema.json",
+  "title": "ArtifactManifest",
+  "description": "Output-package file describing a produced artifact: resolved metadata, a lean section inventory, the declared dependency map, the promotion registry reference, and the artifact SHA-256. Emitted on build only when a DOCX is produced. Correlated to the other package files by executionId. Reproducible under a fixed clock.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["manifestVersion", "executionId", "documentId", "engineVersion", "timestampUtc", "identity", "context", "sections", "dependencies", "artifactSha256"],
+  "properties": {
+    "manifestVersion": { "type": "string", "const": "1.0.0" },
+    "executionId": { "type": "string", "description": "Echoes sourceWorkflowContext.executionId; correlates to the other package files." },
+    "documentId": { "type": "string" },
+    "engineVersion": { "type": "string" },
+    "timestampUtc": { "type": "string", "format": "date-time" },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifactType", "documentId", "version", "classification", "approvalStatus", "layer"],
+      "properties": {
+        "artifactType": { "type": "string" },
+        "documentId": { "type": "string" },
+        "version": { "type": "string" },
+        "classification": { "type": "string" },
+        "approvalStatus": { "type": "string" },
+        "layer": { "type": "string" }
+      }
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["owner", "audience", "preparedBy"],
+      "properties": {
+        "owner": { "type": "string" },
+        "audience": { "type": "string" },
+        "preparedBy": { "type": "string" },
+        "client": { "type": ["string", "null"] },
+        "engagement": { "type": ["string", "null"] },
+        "reviewDate": { "type": ["string", "null"] }
+      }
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["number", "title", "blockCount", "clauseIds"],
+        "properties": {
+          "number": { "type": "integer", "minimum": 1 },
+          "title": { "type": "string" },
+          "blockCount": { "type": "integer", "minimum": 0 },
+          "clauseIds": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["dependencyId", "kind", "blocking"],
+        "properties": {
+          "dependencyId": { "type": "string" },
+          "kind": { "type": "string" },
+          "blocking": { "type": "boolean" }
+        }
+      }
+    },
+    "registryReference": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["documentId", "fromStatus", "toStatus", "version"],
+      "properties": {
+        "documentId": { "type": "string" },
+        "fromStatus": { "type": "string" },
+        "toStatus": { "type": "string" },
+        "version": { "type": "string" }
+      }
+    },
+    "artifactSha256": { "type": "string", "description": "SHA-256 of the emitted DOCX. Always present because the manifest is emitted only when a DOCX is produced." }
+  }
+}

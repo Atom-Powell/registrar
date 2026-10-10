@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactIdentity": {
+    "artifactType": "DS",
+    "documentId": "ORG-GOV-DS-016",
+    "version": "v1.0",
+    "classification": "Client-Facing",
+    "approvalStatus": "Draft",
+    "layer": "Governance"
+  },
+  "context": {
+    "client": "Talewind CPA",
+    "engagement": "Copilot Chat Pilot 2026",
+    "owner": "Registry Owner",
+    "audience": "Talewind CPA leadership, tenant admin, ORG delivery lead",
+    "preparedBy": "ORG Consulting, LLC",
+    "reviewDate": "2030-01-01",
+    "reviewDateOverride": null
+  },
+  "sourceWorkflowContext": {
+    "workflowName": "Copilot Readiness Assessment",
+    "phase": "Reporting",
+    "executionId": "GOV-2026-07-03-001"
+  },
+  "dataInputs": {
+    "placeholderMap": {
+      "[CLIENT ORGANIZATION NAME]": "Talewind CPA",
+      "[CLIENT TENANT NAME / TENANT ID]": "talewindcpa.onmicrosoft.com",
+      "[APPROVED USER GROUP OR PILOT GROUP]": "Copilot Pilot Group",
+      "[TOOL / CONNECTOR NAME]": "Microsoft Copilot Chat",
+      "[APPROVED PURPOSE]": "Drafting and summarization of non-restricted business content",
+      "[OUT OF SCOPE USES]": "Processing regulated client financial data",
+      "[DESIGNATED SECURITY OWNER]": "J. Talewind",
+      "[ORG SUPPORT CONTACT]": "support@orgconsulting.example",
+      "[DATE]": "2026-07-03",
+      "[VERSION]": "v1.0"
+    },
+    "sections": [
+      { "title": "Purpose", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "This summary documents the approved pilot deployment posture for Microsoft Copilot Chat." }
+      ] },
+      { "title": "Deployment Scope", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "Scope covers the approved pilot group only." }
+      ] },
+      { "title": "Access Model", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "Access is limited to approved users through approved accounts." }
+      ] },
+      { "title": "Control Framework", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "Controls follow the approved governance baseline." }
+      ] },
+      { "title": "Audit, Logging, and Discoverability Validation", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "Audit posture is subject to tenant validation." },
+        { "blockType": "clauseInsertion", "clauseId": "CL-006" }
+      ] },
+      { "title": "Roles and Responsibilities", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "Roles are assigned to the security owner and delivery lead." }
+      ] },
+      { "title": "Client Acknowledgment", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "The client acknowledges the deployment posture described above." }
+      ] },
+      { "title": "Version and Change Notes", "descriptorLine": null, "blocks": [
+        { "blockType": "paragraph", "text": "v1.0 initial issue." }
+      ] }
+    ],
+    "normalizedFindings": null,
+    "normalizedRisks": null,
+    "normalizedInventoryEntities": null
+  },
+  "evidenceReferences": null,
+  "dependencies": [
+    { "dependencyId": "ORG-MST-SCL", "kind": "clause-library", "blocking": true }
+  ],
+  "renderingOptions": {
+    "packageName": "Governed AI Rollout",
+    "outputFileName": "ORG - Deployment Summary - Talewind CPA - v1.0.docx",
+    "optionalSectionToggles": null,
+    "stylingProfile": "org-v1.2"
+  },
+  "validationPolicy": {
+    "mode": "draft",
+    "additionalRequiredCheckIds": null,
+    "warningThreshold": null
+  }
+}

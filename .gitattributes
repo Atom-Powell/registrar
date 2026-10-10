@@ -1,0 +1,31 @@
+# The generated Governor knowledge files are byte-compared against a fresh render by
+# GeneratedKnowledgeIsCurrentTests. The projections emit "\n" literals deliberately, so
+# these files must stay LF on disk on every platform. Without this, core.autocrlf=true
+# rewrites them to CRLF on checkout and the guard fails on a clean clone with no config
+# change. Scoped narrowly on purpose: renormalizing the rest of the repo is a separate
+# decision and would churn files this task has no business touching.
+docs/governor/*.md text eol=lf
+
+# Fixture AGRs and their goldens are compared byte for byte, and a golden for a
+# missing-required-property violation embeds the fixture's entire raw text. Without
+# this, core.autocrlf rewrites them to CRLF on checkout and the embedded text stops
+# matching, which fails only on a fresh clone and never locally.
+fixtures/**/*.json text eol=lf
+fixtures/**/*.csv  text eol=lf
+
+# The generated stylesheet is byte-compared against a fresh render by
+# GeneratedTokensAreCurrentTests, and TokenProjection emits "\n" literals deliberately.
+# Without this, core.autocrlf rewrites it to CRLF on checkout and the guard fails on a
+# clean clone with no config change, exactly as it did for the generated knowledge files.
+config/generated/*.css text eol=lf
+
+# The config and schema files are hashed over their raw bytes: the hashes go into every
+# validation report's configVersions, into the generated stylesheet and Governor knowledge
+# documents, and into the fixture goldens. Raw bytes include the line endings, so without
+# this a Windows checkout (core.autocrlf=true, which is what CI runs) hashes the CRLF copy
+# while a Linux or macOS clone, or a tool that rewrites the file with LF, hashes the LF
+# copy, and the pinned hashes stop matching on whichever side did not generate them.
+# Pinning to LF makes every checkout produce the same bytes. Re-pin the hashes once after
+# changing this (emit-tokens, emit-knowledge, test --all --update).
+config/*.json text eol=lf
+schemas/*.json text eol=lf
